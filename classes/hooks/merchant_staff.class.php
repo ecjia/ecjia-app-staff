@@ -21,8 +21,8 @@ class merchant_staff_hooks {
 		//本月开始时间
 		$start_month = mktime(0,0,0,date('m'),1,date('Y'))-8*3600;
 
-		RC_Loader::load_app_class('order_list', 'orders', false);
-		$order = new order_list();
+		RC_Loader::load_app_class('merchant_order_list', 'orders', false);
+		$order = new merchant_order_list();
 		
 		$order_money = RC_DB::table('order_info as o')
 			->leftJoin('order_goods as og', RC_DB::raw('o.order_id'), '=', RC_DB::raw('og.order_id'))
