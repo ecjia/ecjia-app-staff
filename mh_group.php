@@ -18,8 +18,8 @@ class mh_group extends ecjia_merchant {
 
 		RC_Script::enqueue_script('staff_group', RC_App::apps_url('statics/js/staff_group.js', __FILE__));
 		
-		ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here('员工管理', RC_Uri::url('staff/mh_group/init')));
-		ecjia_merchant_screen::get_current_screen()->set_parentage('staff', 'staff/mh_group.php');
+		ecjia_merchant_screen::get_current_screen()->set_parentage('staff', 'staff/merchant.php');
+		ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here('员工管理', RC_Uri::url('staff/merchant/init')));
 	}
 
 	
@@ -47,6 +47,7 @@ class mh_group extends ecjia_merchant {
 	public function add() {
 		$this->admin_priv('staff_group_update',ecjia::MSGTYPE_JSON);
 
+		ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here(RC_Lang::get('staff::staff.group_list'), RC_Uri::url('staff/mh_group/init')));
 		ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here(RC_Lang::get('staff::staff.staff_group_add')));
 		$this->assign('ur_here', RC_Lang::get('staff::staff.staff_group_add'));
 		$this->assign('action_link',array('href' => RC_Uri::url('staff/mh_group/init'),'text' => RC_Lang::get('staff::staff.group_list')));
@@ -91,6 +92,7 @@ class mh_group extends ecjia_merchant {
 	public function edit() {
 		$this->admin_priv('staff_group_update', ecjia::MSGTYPE_JSON);
 
+		ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here(RC_Lang::get('staff::staff.group_list'), RC_Uri::url('staff/mh_group/init')));
 		ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here(RC_Lang::get('staff::staff.staff_group_update')));
 		$this->assign('ur_here',RC_Lang::get('staff::staff.staff_group_update'));
 		$this->assign('action_link',array('href' => RC_Uri::url('staff/mh_group/init'),'text' => RC_Lang::get('staff::staff.group_list')));
