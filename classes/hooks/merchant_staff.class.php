@@ -26,8 +26,6 @@ class merchant_staff_hooks {
 		
 		$order_money = RC_DB::table('order_info as o')
 			->leftJoin('order_goods as og', RC_DB::raw('o.order_id'), '=', RC_DB::raw('og.order_id'))
-// 			->leftJoin('pay_log as pl', RC_DB::raw('pl.order_id'), '=', RC_DB::raw('o.order_id'))
-// 			->select(RC_DB::raw('pl.order_amount'))
 			->selectRaw("(" . $order->order_amount_field('o.') . ") AS order_amount")
 			->where(RC_DB::raw('o.store_id'), $_SESSION['store_id'])
 			->where(RC_DB::raw('o.add_time'), '>=', $start_month)

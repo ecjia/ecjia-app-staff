@@ -20,35 +20,6 @@ class get_password extends ecjia_merchant {
 		'ecjia-mh-page',
 		));
 		
-		//禁止以下js加载
-		RC_Script::dequeue_script(array(
-		// 			'jquery',
-		// 			'bootstrap',
-		// 			'jquery-pjax',
-		// 			'ecjia-mh-jquery-customSelect',
-		// 			'ecjia-mh-jquery-dcjqaccordion',
-		// 			'ecjia-mh-jquery-nicescroll',
-		// 			'ecjia-mh-jquery-scrollTo',
-		// 			'ecjia-mh-jquery-sparkline',
-		// 			'ecjia-mh-jquery-stepy',
-		// 			'ecjia-mh-jquery-tagsinput',
-		// 			'ecjia-mh-jquery-validate',
-		// 			'ecjia-mh-jquery-easy-pie-chart',
-		// 			'ecjia-mh-jquery-actual',
-		// 			'ecjia-mh-morris-script',
-		// 			'ecjia-mh-owl-carousel',
-		// 			'ecjia-mh-respond',
-		// 			'ecjia-mh-slider',
-		// 			'ecjia-mh-sparkline-chart',
-		// 			'ecjia-mh-themes',
-		// 			'ecjia-mh-xchart',
-		// 			'jquery-cookie',
-		// 			'js-json',
-		// 			'nicescroll',
-		// 			'jquery-ui-totop',
-		// 			'ecjia-merchant',
-		// 			'ecjia-merchant-ui'
-		));
 		$this->assign('shop_name', ecjia::config('shop_name'));
 		$this->assign('ur_here_mobile','手机号找回密码');
 		$this->assign('ur_here_email','邮箱找回密码');
@@ -99,7 +70,6 @@ class get_password extends ecjia_merchant {
 			$code     = md5($admin_id . $admin_info['password']);
 			$reset_email = RC_Uri::url('staff/get_password/reset_pwd_form', array('uid' => $admin_id, 'code' => $code));
 			/* 设置重置邮件模板所需要的内容信息 */
-			//$template    = get_mail_template('send_password');
 			$tpl_name = 'send_password';
 			$template   = RC_Api::api('mail', 'mail_template', $tpl_name);
 	
