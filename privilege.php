@@ -154,7 +154,7 @@ class privilege extends ecjia_merchant {
 		RC_Cookie::delete('ECJAP.staff_pass');
 		
 		RC_Session::destroy();
-		$this->redirect(RC_Uri::url('staff/privilege/login'));
+		return $this->redirect(RC_Uri::url('staff/privilege/login'));
 	}
 }
 //end
