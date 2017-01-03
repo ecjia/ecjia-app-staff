@@ -4,7 +4,7 @@ defined('IN_ECJIA') or exit('No permission resources.');
 class merchant_staff_hooks {
 	//店铺信息
 	public static function merchant_dashboard_information() {
-		RC_Loader::load_app_func('merchant_merchant', 'merchant');
+		RC_Loader::load_app_func('merchant', 'merchant');
 		$merchant_info = get_merchant_info();
 		ecjia_admin::$controller->assign('merchant_info', $merchant_info);
 
