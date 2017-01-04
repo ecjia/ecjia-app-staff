@@ -1,8 +1,9 @@
 <?php
+defined('IN_ECJIA') or exit('No permission resources.');
+
 /**
  * 员工组管理
  */
-defined('IN_ECJIA') or exit('No permission resources.');
 
 class mh_group extends ecjia_merchant {
 	public function __construct() {
@@ -183,4 +184,5 @@ class mh_group extends ecjia_merchant {
 		return array('staff_group_list' => $res, 'filter' => $filter, 'page' => $page->show(2), 'desc' => $page->page_desc());
 	}
 }
+
 //end

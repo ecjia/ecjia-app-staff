@@ -1,8 +1,9 @@
 <?php
+defined('IN_ECJIA') or exit('No permission resources.');
+
 /**
  * 员工登录、退出、找回密码
  */
-defined('IN_ECJIA') or exit('No permission resources.');
 
 class privilege extends ecjia_merchant {
 	public function __construct() {
@@ -11,7 +12,6 @@ class privilege extends ecjia_merchant {
 		RC_Script::enqueue_script('smoke');
 		RC_Script::enqueue_script('jquery-form');		
 	}
-
 
 	/**
 	 * 登录
@@ -128,4 +128,5 @@ class privilege extends ecjia_merchant {
 		return $this->redirect(RC_Uri::url('staff/privilege/login'));
 	}
 }
+
 //end

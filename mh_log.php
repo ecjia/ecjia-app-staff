@@ -1,8 +1,9 @@
 <?php
+defined('IN_ECJIA') or exit('No permission resources.');
+
 /**
  * 员工日志管理
  */
-defined('IN_ECJIA') or exit('No permission resources.');
 
 class mh_log extends ecjia_merchant {
 	public function __construct() {
@@ -118,4 +119,5 @@ class mh_log extends ecjia_merchant {
 		return array('list' => $list, 'page' => $page->show(2), 'desc' => $page->page_desc());
 	}
 }
+
 //end

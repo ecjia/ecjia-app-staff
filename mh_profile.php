@@ -1,8 +1,9 @@
 <?php
+defined('IN_ECJIA') or exit('No permission resources.');
+
 /**
  * 个人信息
  */
-defined('IN_ECJIA') or exit('No permission resources.');
 
 class mh_profile extends ecjia_merchant {
 	public function __construct() {
@@ -312,4 +313,5 @@ class mh_profile extends ecjia_merchant {
 		return $this->showmessage('上传新头像成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('staff/mh_profile/avatar')));
 	}
 }
+
 //end

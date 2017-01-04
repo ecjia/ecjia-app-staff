@@ -1,8 +1,9 @@
 <?php
+defined('IN_ECJIA') or exit('No permission resources.');
+
 /**
  * 找回密码
  */
-defined('IN_ECJIA') or exit('No permission resources.');
 
 class get_password extends ecjia_merchant {
 	public function __construct() {
@@ -171,8 +172,6 @@ class get_password extends ecjia_merchant {
 		}
 	}
 	
-	
-	
 	/**
 	 * 手机快速找回页面,只输入手机号那个页面
 	 */
@@ -280,4 +279,5 @@ class get_password extends ecjia_merchant {
 		}
 	}
 }
+
 //end

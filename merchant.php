@@ -1,8 +1,9 @@
 <?php
+defined('IN_ECJIA') or exit('No permission resources.');
+
 /**
  * 员工管理
  */
-defined('IN_ECJIA') or exit('No permission resources.');
 
 class merchant extends ecjia_merchant {
 	public function __construct() {
@@ -183,14 +184,14 @@ class merchant extends ecjia_merchant {
 		}
 		$manager_id = RC_DB::TABLE('staff_user')->where('store_id',$_SESSION['store_id'])->where('parent_id', 0)->pluck('user_id');
 		$data = array(
-			'store_id' 	=> $store_id,
-			'name' 		=> !empty($_POST['name']) 		? $_POST['name'] : '',
-			'nick_name' => !empty($_POST['nick_name']) 	? $_POST['nick_name'] : '',
-			'user_ident'=> !empty($_POST['user_ident']) ? $_POST['user_ident'] : '',
-			'mobile' 	=> $_SESSION['mobile'],
-			'email' 	=> !empty($_POST['email']) 		? $_POST['email'] : '',
-			'password' 	=> md5($_POST['password']),
-			'group_id' 	=> $group_id,
+			'store_id' 	    => $store_id,
+			'name' 		    => !empty($_POST['name']) 		? $_POST['name'] : '',
+			'nick_name'     => !empty($_POST['nick_name']) 	? $_POST['nick_name'] : '',
+			'user_ident'    => !empty($_POST['user_ident']) ? $_POST['user_ident'] : '',
+			'mobile' 	    => $_SESSION['mobile'],
+			'email' 	    => !empty($_POST['email']) 		? $_POST['email'] : '',
+			'password' 	    => md5($_POST['password']),
+			'group_id' 	    => $group_id,
 			'action_list' 	=> $action_list,
 			'todolist' 		=> !empty($_POST['todolist']) 	? $_POST['todolist'] : '',
 			'add_time' 		=> RC_Time::gmtime(),
@@ -430,8 +431,8 @@ class merchant extends ecjia_merchant {
 			}
 		}
 		
-		
 		return $group_list;
 	}
 }
+
 //end
