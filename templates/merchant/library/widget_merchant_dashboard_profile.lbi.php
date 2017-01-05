@@ -9,14 +9,14 @@
     </div>
     <div class="panel-body">
         <div class="text-center" id="author">
-			<a class="ecjiafc-333" href="{RC_Uri::url('staff/mh_profile/init')}">
+			<a href="{RC_Uri::url('staff/mh_profile/init')}">
 				{if $user_info.avatar eq ''}
 	                <img src="{$ecjia_main_static_url}img/ecjia_avatar.jpg" /><br>
 	            {else}
 	            	<img width ="100" height="100" src="{RC_Upload::upload_url()}/{$user_info.avatar}">
 	            {/if}
-	            <h3>{$user_info.name}</h3>
-			</a>
+	   		</a>
+			<h3>{$user_info.name}</h3>
             {if $user_info.parent_id eq 0}
             <small class="label label-warning">店长</small>
             {/if}
