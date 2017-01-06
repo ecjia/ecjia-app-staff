@@ -4,7 +4,6 @@ defined('IN_ECJIA') or exit('No permission resources.');
 /**
  * 找回密码
  */
-
 class get_password extends ecjia_merchant {
 	public function __construct() {
 		parent::__construct();
@@ -268,7 +267,7 @@ class get_password extends ecjia_merchant {
 		$salt = rand(1, 9999);
 		$data = array(
 			'password' => md5(md5($new_password) . $salt),
-			'salt' => $salt
+			'salt'     => $salt
 		);
 		$result = RC_DB::table('staff_user')->where('user_id', $_SESSION['user_id'])->update($data);
 		if ($result) {

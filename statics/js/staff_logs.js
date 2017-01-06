@@ -1,3 +1,4 @@
+// JavaScript Document
 ;(function(app, $) {
 	app.staff_logs = {
 		init : function(){
@@ -32,3 +33,5 @@
 	};
 
 })(ecjia.merchant, jQuery);
+
+//end

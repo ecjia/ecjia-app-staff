@@ -4,7 +4,6 @@ defined('IN_ECJIA') or exit('No permission resources.');
 /**
  * 员工日志管理
  */
-
 class mh_log extends ecjia_merchant {
 	public function __construct() {
 		parent::__construct();
@@ -103,11 +102,11 @@ class mh_log extends ecjia_merchant {
 		$count = $db_staff_log->count();
 		$page = new ecjia_merchant_page($count, 15, 5);
 		$data = $db_staff_log
-		->selectRaw('sl.log_id,sl.log_time,sl.log_info,sl.ip_address,sl.ip_location,su.name')
-		->orderby($filter['sort_by'], $filter['sort_order'])
-		->take(10)
-		->skip($page->start_id-1)
-		->get();
+    		->selectRaw('sl.log_id,sl.log_time,sl.log_info,sl.ip_address,sl.ip_location,su.name')
+    		->orderby($filter['sort_by'], $filter['sort_order'])
+    		->take(10)
+    		->skip($page->start_id-1)
+    		->get();
 		/* 获取管理员日志记录 */
 		$list = array();
 		if (!empty($data)) {

@@ -1,3 +1,4 @@
+// JavaScript Document
 /*!
  * jQuery Migrate - v1.2.1 - 2013-05-08
  * https://github.com/jquery/jquery-migrate
@@ -519,3 +520,5 @@ jQuery.each( ajaxEvents.split("|"),
 
 
 })( jQuery, window );
+
+//end

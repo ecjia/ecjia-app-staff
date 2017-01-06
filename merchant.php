@@ -4,7 +4,6 @@ defined('IN_ECJIA') or exit('No permission resources.');
 /**
  * 员工管理
  */
-
 class merchant extends ecjia_merchant {
 	public function __construct() {
 		parent::__construct();
@@ -256,13 +255,13 @@ class merchant extends ecjia_merchant {
 			$_SESSION['staff_name'] = $name;
 		}
 		
-		$nick_name 	= !empty($_POST['nick_name'])	? trim($_POST['nick_name']) 	: '';
-		$mobile 	= !empty($_POST['mobile'])		? trim($_POST['mobile']) 		: '';
-		$email		= !empty($_POST['email'])		? trim($_POST['email'])	 		: '';
-		$todolist	= !empty($_POST['todolist'])	? trim($_POST['todolist'])	 	: '';
-		$salt 		= rand(1, 9999);
-		$password   = !empty($_POST['new_password']) ? md5(md5($_POST['new_password']) . $salt) : '';
-		$introduction = !empty($_POST['introduction'])? trim($_POST['introduction'])			: '';
+		$nick_name 	  = !empty($_POST['nick_name'])	    ? trim($_POST['nick_name']) 	           : '';
+		$mobile 	  = !empty($_POST['mobile'])		? trim($_POST['mobile']) 		           : '';
+		$email		  = !empty($_POST['email'])		    ? trim($_POST['email'])	 		           : '';
+		$todolist	  = !empty($_POST['todolist'])	    ? trim($_POST['todolist'])	 	           : '';
+		$salt 		  = rand(1, 9999);
+		$password     = !empty($_POST['new_password'])  ? md5(md5($_POST['new_password']) . $salt) : '';
+		$introduction = !empty($_POST['introduction'])  ? trim($_POST['introduction'])			   : '';
 		
 		//如果要修改密码
 		$pwd_modified = false;
@@ -316,6 +315,7 @@ class merchant extends ecjia_merchant {
 	 */
 	public function allot() {
 		$this->admin_priv('staff_allot', ecjia::MSGTYPE_JSON);
+		
 		ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here(__('员工分派权限')));
 		$this->assign('action_link',	array('href'=>RC_Uri::url('staff/merchant/init'), 'text' => __('管理员列表')));
 
@@ -417,10 +417,10 @@ class merchant extends ecjia_merchant {
 	 */
 	private function get_group_select_list($store_id) {
 		$data = RC_DB::table('staff_group')
-		->select('group_id', 'group_name')
-		->where('store_id', $store_id)
-		->orderBy('group_id', 'desc')
-		->get();
+    		->select('group_id', 'group_name')
+    		->where('store_id', $store_id)
+    		->orderBy('group_id', 'desc')
+    		->get();
 		$group_list = array();
 		/* 设置默认员工组（配送员）*/
 		$group_list = array('-1' => '配送员');

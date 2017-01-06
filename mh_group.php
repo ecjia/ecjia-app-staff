@@ -4,7 +4,6 @@ defined('IN_ECJIA') or exit('No permission resources.');
 /**
  * 员工组管理
  */
-
 class mh_group extends ecjia_merchant {
 	public function __construct() {
 		parent::__construct();
@@ -169,12 +168,12 @@ class mh_group extends ecjia_merchant {
 		$page = new ecjia_merchant_page($count, 10, 5);
 		
 		$data = $db_staff_group
-		->selectRaw('group_id,group_name,groupdescribe')
-		->where('store_id', $store_id)
-		->orderby('group_id', 'asc')
-		->take(10)
-		->skip($page->start_id-1)
-		->get();
+    		->selectRaw('group_id,group_name,groupdescribe')
+    		->where('store_id', $store_id)
+    		->orderby('group_id', 'asc')
+    		->take(10)
+    		->skip($page->start_id-1)
+    		->get();
 		$res = array();
 		if (!empty($data)) {
 			foreach ($data as $row) {

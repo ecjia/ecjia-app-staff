@@ -4,7 +4,6 @@ defined('IN_ECJIA') or exit('No permission resources.');
 /**
  * 个人信息
  */
-
 class mh_profile extends ecjia_merchant {
 	public function __construct() {
 		parent::__construct();

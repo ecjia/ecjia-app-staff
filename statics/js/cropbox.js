@@ -1,3 +1,4 @@
+// JavaScript Document
 /**
  * Created by ezgoing on 14/9/2014.
  */
@@ -139,3 +140,5 @@
 }));
 
 /*www.jq22.com*/
+
+//end

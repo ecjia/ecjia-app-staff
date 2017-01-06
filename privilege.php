@@ -4,7 +4,6 @@ defined('IN_ECJIA') or exit('No permission resources.');
 /**
  * 员工登录、退出、找回密码
  */
-
 class privilege extends ecjia_merchant {
 	public function __construct() {
 		parent::__construct();
