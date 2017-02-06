@@ -105,7 +105,7 @@ class privilege extends ecjia_merchant {
 		RC_Hook::do_action('ecjia_merchant_login_before', $row);
 		if ($row) {
 			$status = RC_DB::TABLE('store_franchisee')->where('store_id', $row['store_id'])->pluck('status');
-			if($status==1){
+			if ($status == 1) {
 				$row['merchants_name'] = RC_DB::TABLE('store_franchisee')->where('store_id', $row['store_id'])->pluck('merchants_name');
 				$this->admin_session($row['store_id'], $row['merchants_name'], $row['user_id'], $row['mobile'], $row['name'], $row['action_list'], $row['last_login']);
 				if (empty($row['salt'])) {
@@ -152,7 +152,7 @@ class privilege extends ecjia_merchant {
 					}
 				}
 				return $this->showmessage(__('登录成功'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('url' => $back_url));
-			}else{
+			} else {
 				return $this->showmessage(__('该店铺已被锁定，暂无法登录'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
 			}
 		} else {
