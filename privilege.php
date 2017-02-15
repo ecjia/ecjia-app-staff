@@ -122,7 +122,7 @@ class privilege extends ecjia_merchant {
 				}
 				
 				if ($row['action_list'] == 'all' && empty($row['last_login'])) {
-					$_SESSION['shop_guide'] = true; //商家开店导航设置开关
+						$_SESSION['shop_guide'] = true; //商家开店导航设置开关
 				}
 				
 				$data = array(
@@ -138,16 +138,14 @@ class privilege extends ecjia_merchant {
 					RC_Cookie::set('ECJAP.staff_id', $row['user_id'], array('expire' => $time));
 					RC_Cookie::set('ECJAP.staff_pass', md5($row['password'] . ecjia::config('hash_code')), array('expire' => $time));
 				}
-				
 				RC_Hook::do_action('ecjia_merchant_login_after', $row);
-				
-				if (RC_Cookie::has('admin_login_referer')) {
-					$back_url = RC_Cookie::get('admin_login_referer');
-					RC_Cookie::delete('admin_login_referer');
-				} else {
-					if(array_get($_SESSION, 'shop_guide')) {
-						$back_url = RC_Uri::url('shopguide/merchant/init');
-					}else{
+				if(array_get($_SESSION, 'shop_guide')) {
+					$back_url = RC_Uri::url('shopguide/merchant/init');
+				}else{
+					if (RC_Cookie::has('admin_login_referer')) {
+						$back_url = RC_Cookie::get('admin_login_referer');
+						RC_Cookie::delete('admin_login_referer');
+					} else {
 						$back_url = RC_Uri::url('merchant/dashboard/init');
 					}
 				}
