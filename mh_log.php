@@ -69,7 +69,7 @@ class mh_log extends ecjia_merchant {
 	 * 员工日志列表页面
 	 */
 	public function init() {
-		$this->admin_priv('staff_log_manage',ecjia::MSGTYPE_JSON);
+		$this->admin_priv('staff_log_manage');
 
 		ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here('员工日志'));
 		$this->assign('ur_here', RC_Lang::get('staff::staff.log_list'));
@@ -99,11 +99,10 @@ class mh_log extends ecjia_merchant {
 		$this->assign('form_search_action', RC_Uri::url('staff/mh_log/init'));
 
 		$this->assign('logs', $logs);
-		$this->assign('ip_list',   $ip_list);
-		$this->assign('user_list',   $user_list);
+		$this->assign('ip_list', $ip_list);
+		$this->assign('user_list', $user_list);
 
 		$this->display('staff_log_list.dwt');
-
 	}
 
 	/**

@@ -72,7 +72,7 @@ class mh_group extends ecjia_merchant {
 	 * 员工组列表页面
 	 */
 	public function init() {
-	    $this->admin_priv('staff_group_manage',ecjia::MSGTYPE_JSON);
+	    $this->admin_priv('staff_group_manage');
 
 		ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here('员工组列表'));
 	    $this->assign('ur_here', RC_Lang::get('staff::staff.group_list'));
@@ -90,7 +90,7 @@ class mh_group extends ecjia_merchant {
 	 * 添加员工组页面
 	 */
 	public function add() {
-		$this->admin_priv('staff_group_update',ecjia::MSGTYPE_JSON);
+		$this->admin_priv('staff_group_update');
 
 		ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here(RC_Lang::get('staff::staff.group_list'), RC_Uri::url('staff/mh_group/init')));
 		ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here(RC_Lang::get('staff::staff.staff_group_add')));
@@ -110,7 +110,7 @@ class mh_group extends ecjia_merchant {
 	 * 处理添加员工组
 	 */
 	public function insert() {
-		$this->admin_priv('staff_group_update',ecjia::MSGTYPE_JSON);
+		$this->admin_priv('staff_group_update', ecjia::MSGTYPE_JSON);
 		
 		if (RC_DB::table('staff_group')->where('group_name', $_POST['group_name'])->where('store_id',$_SESSION['store_id'])->count() > 0) {
 			return $this->showmessage('该员工组名称已存在', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
@@ -135,7 +135,7 @@ class mh_group extends ecjia_merchant {
 	 * 编辑员工组页面
 	 */
 	public function edit() {
-		$this->admin_priv('staff_group_update', ecjia::MSGTYPE_JSON);
+		$this->admin_priv('staff_group_update');
 
 		ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here(RC_Lang::get('staff::staff.group_list'), RC_Uri::url('staff/mh_group/init')));
 		ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here(RC_Lang::get('staff::staff.staff_group_update')));
@@ -163,7 +163,7 @@ class mh_group extends ecjia_merchant {
 	 * 编辑员工组信息处理
 	 */
 	public function update() {
-		$this->admin_priv('staff_group_update',ecjia::MSGTYPE_JSON);
+		$this->admin_priv('staff_group_update', ecjia::MSGTYPE_JSON);
 		
 		$action_list = join(",", $_POST['action_code']);
 		$group_id = intval($_POST['group_id']);
@@ -185,7 +185,7 @@ class mh_group extends ecjia_merchant {
 	 * 删除员工组
 	 */
 	public function remove() {
-		$this->admin_priv('staff_group_remove',ecjia::MSGTYPE_JSON);
+		$this->admin_priv('staff_group_remove', ecjia::MSGTYPE_JSON);
 
 		$group_id = intval($_GET['group_id']);
 		$remove_num = RC_DB::table('staff_user')->where('group_id', $group_id)->count();
