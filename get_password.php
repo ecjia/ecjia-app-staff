@@ -193,7 +193,7 @@ class get_password extends ecjia_merchant {
 			$link[0]['href'] = RC_Uri::url('staff/privilege/login');
 			return $this->showmessage(__('此链接不合法!'), ecjia::MSGSTAT_ERROR | ecjia::MSGTYPE_JSON);
 		} else {
-			if($new_password != $confirm_pwd){
+			if ($new_password != $confirm_pwd) {
 				return $this->showmessage(__('新密码和确认密码须保持一致'), ecjia::MSGSTAT_ERROR | ecjia::MSGTYPE_JSON);
 			}
 			
@@ -231,7 +231,7 @@ class get_password extends ecjia_merchant {
 	 */
 	public function fast_reset_pwd() {
 		$mobile = $_POST['mobile'];
-		if(!empty($mobile)){
+		if (!empty($mobile)) {
 			if (RC_DB::table('staff_user')->where('mobile', $mobile)->count() == 0) {
 				return $this->showmessage('该手机账号不存在，无法进行重置密码', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
 			}else{
@@ -300,8 +300,8 @@ class get_password extends ecjia_merchant {
 	public function mobile_reset_pwd(){
 		$new_password = isset($_POST['password']) ? trim($_POST['password']) : '';
 		$confirm_pwd  = isset($_POST['confirm_pwd']) ? trim($_POST['confirm_pwd']) : '';
-		if($new_password != $confirm_pwd){
-			return $this->showmessage(__('新密码和确认密码须保持一致'), ecjia::MSGSTAT_ERROR | ecjia::MSGTYPE_JSON);
+		if ($new_password != $confirm_pwd) {
+			return $this->showmessage('新密码和确认密码须保持一致', ecjia::MSGSTAT_ERROR | ecjia::MSGTYPE_JSON);
 		}
 		
 		// 更新管理员的密码

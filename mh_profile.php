@@ -209,7 +209,7 @@ class mh_profile extends ecjia_merchant {
 	//获取短信验证码
 	public function get_mobile_code(){
 		$newmobile = $_GET['newmobile'];
-		if(empty($newmobile)){
+		if (empty($newmobile)) {
 			return $this->showmessage('请输入新的手机账号', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
 		}
 		
@@ -262,7 +262,7 @@ class mh_profile extends ecjia_merchant {
 	public function get_email_code(){
 		$newemail = $_GET['newemail'];
 		
-		if(empty($newemail)){
+		if (empty($newemail)) {
 			return $this->showmessage('请输入新的邮件账号', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
 		}
 		

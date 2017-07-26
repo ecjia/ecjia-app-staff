@@ -118,7 +118,7 @@ class merchant extends ecjia_merchant {
 		$step = $_GET['step'];
 		if ($step ==1) {
 			$this->assign('form_action',RC_Uri::url('staff/merchant/insert_one', array('step' => 1)));
-		} elseif($step ==2) {
+		} elseif ($step ==2) {
 			$this->assign('form_action',RC_Uri::url('staff/merchant/insert'));
 		} else {
 			$user_id = intval($_GET['id']);
@@ -142,12 +142,12 @@ class merchant extends ecjia_merchant {
 	public function get_code_value() {
 		
 		$count = RC_DB::table('staff_user')->where('store_id',$_SESSION['store_id'])->where('parent_id', '>', 0)->count();
-		if($count >= 10){
+		if ($count >= 10) {
 			return $this->showmessage('抱歉，目前子员工数额已达到10个，不可再添加', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
 		}
 		
 		$mobile = $_GET['mobile'];
-		if(empty($mobile)){
+		if (empty($mobile)) {
 			return $this->showmessage('请输入员工手机号', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
 		}
 
@@ -181,7 +181,7 @@ class merchant extends ecjia_merchant {
 		$mobile = $_POST['mobile'];
 		
 		$count = RC_DB::table('staff_user')->where('store_id',$_SESSION['store_id'])->where('parent_id', '>', 0)->count();
-		if($count >= 10){
+		if ($count >= 10) {
 			return $this->showmessage('抱歉，目前子员工数额已达到10个，不可再添加', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
 		}
 		
@@ -336,7 +336,7 @@ class merchant extends ecjia_merchant {
 			);
 		}
 	
-		if($_POST['parent_id'] !=0){
+		if ($_POST['parent_id'] !=0) {
 			$group_id = $_POST['group_id'];
 			$action_list = '';
 			if ($_POST['group_id'] > 0) {
