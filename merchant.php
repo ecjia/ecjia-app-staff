@@ -192,7 +192,7 @@ class merchant extends ecjia_merchant {
 		$time = RC_Time::gmtime() - 6000*3;
 		if (!empty($code) && $code == $_SESSION['temp_code'] && $time < $_SESSION['temp_code_time']) {
 			return $this->showmessage('', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('staff/merchant/add', array('step' => 2))));
-		}else{
+		} else {
 			return $this->showmessage('请输入正确的手机校验码', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
 		}
 	}
