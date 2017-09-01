@@ -82,7 +82,7 @@ class privilege extends ecjia_merchant {
 	}
 	
 	/**
-	 * 验证登陆信息
+	 * 验证登录信息
 	 */
 	public function signin() {
 		$validate_error = RC_Hook::apply_filters('merchant_login_validate', $_POST);
@@ -196,6 +196,7 @@ class privilege extends ecjia_merchant {
 							$staff_info = RC_DB::TABLE('staff_user')->where('store_id', $store_id)->where('parent_id', 0)->where('action_list', 'all')->first();
 							if (!empty($staff_info)) {
 								$merchants_name = RC_DB::TABLE('store_franchisee')->where('store_id', $store_id)->pluck('merchants_name');
+								$_SESSION = array();
 								$this->admin_session($store_id, $merchants_name, $staff_info['user_id'], $staff_info['mobile'], $staff_info['name'], $staff_info['action_list'], $staff_info['last_login']);
 								return $this->redirect(RC_Uri::url('merchant/dashboard/init'));
 							} else {
@@ -212,10 +213,13 @@ class privilege extends ecjia_merchant {
 				$this->assign('error_message', '传参出错。');
 			}
 		} else {
-			$this->assign('error_message', '抱歉！数据丢失，登陆失败。');
+			$this->assign('error_message', '抱歉！数据丢失，登录失败。');
 		}
+		$this->assign('shop_title','商家登录');
+		$this->assign('shop_title_link',RC_Uri::url('staff/privilege/login'));
+		
 		RC_Session::destroy();
-		$this->display('auto_error.dwt');
+		$this->display('staff_auto_login_error.dwt');
 	}
 }
 
