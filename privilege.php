@@ -167,6 +167,52 @@ class privilege extends ecjia_merchant {
 		RC_Session::destroy();
 		return $this->redirect(RC_Uri::url('staff/privilege/login'));
 	}
+	
+	
+	/**
+	 *  自营商家快速登录
+	 */
+	public function autologin() {
+		$authcode = trim($_GET['authcode']);
+		$authcode_decrypt= RC_Crypt::decrypt($authcode);
+		
+		$authcode_array = array();
+		parse_str($authcode_decrypt, $authcode_array);
+		$start_time  = $authcode_array['time'];
+		$store_id    = $authcode_array['store_id'];
+		$admin_token = $authcode_array['admin_token'];
+		
+		$time = RC_Time::gmtime();
+		$time_gap = $time - $start_time;
+		
+		$cookie_name = RC_Config::get('session.session_admin_name');
+		$ecjia_admin_token = $_COOKIE[$cookie_name];
+		if (intval($time_gap) < 30) {
+			if ($admin_token == $ecjia_admin_token) {
+				$session_id = substr($admin_token, 0, 32);
+				$adminid = RC_DB::TABLE('sessions')->where('sesskey', $session_id)->pluck('adminid');
+				$action_list = RC_DB::TABLE('admin_user')->where('user_id', $adminid)->pluck('action_list');
+				if ($action_list == 'all') {
+					$staff_info = RC_DB::TABLE('staff_user')->where('store_id', $store_id)->where('parent_id', 0)->where('action_list', 'all')->first();
+					if (!empty($staff_info)) {
+						$merchants_name = RC_DB::TABLE('store_franchisee')->where('store_id', $store_id)->pluck('merchants_name');
+						$this->admin_session($store_id, $merchants_name, $staff_info['user_id'], $staff_info['mobile'], $staff_info['name'], $staff_info['action_list'], $staff_info['last_login']);
+						return $this->redirect(RC_Uri::url('merchant/dashboard/init'));
+					} else {
+						$this->assign('error_message', '获取店长信息失败');
+						$this->display('auto_error.dwt');
+					}
+				} 
+				else {
+					$this->assign('error_message', '抱歉！只允许超级管理员进行登录。');
+					$this->display('auto_error.dwt');
+				}
+			}
+		} else {
+			$this->assign('error_message', '抱歉！请求超时');
+			$this->display('auto_error.dwt');
+		}
+	}
 }
 
 //end
