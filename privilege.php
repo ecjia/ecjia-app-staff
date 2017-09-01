@@ -190,8 +190,7 @@ class privilege extends ecjia_merchant {
 		if (intval($time_gap) < 30) {
 			if ($session_id == $ecjia_admin_token) {
 				$session_data = RC_Session::session()->get_session_data($session_id);
-				$action_list = RC_DB::TABLE('admin_user')->where('user_id', $session_data['admin_id'])->pluck('action_list');
-				if ($action_list == 'all') {
+				if ($session_data['action_list'] == 'all') {
 					$staff_info = RC_DB::TABLE('staff_user')->where('store_id', $store_id)->where('parent_id', 0)->where('action_list', 'all')->first();
 					if (!empty($staff_info)) {
 						$merchants_name = RC_DB::TABLE('store_franchisee')->where('store_id', $store_id)->pluck('merchants_name');
