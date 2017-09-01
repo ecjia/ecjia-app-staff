@@ -174,7 +174,6 @@ class privilege extends ecjia_merchant {
 	 */
 	public function autologin() {
 		$authcode = trim($_GET['authcode']);
-		
 		if ($authcode) {
 			$authcode_decrypt= RC_Crypt::decrypt($authcode);
 			$authcode_array = array();
@@ -202,8 +201,7 @@ class privilege extends ecjia_merchant {
 							} else {
 								$this->assign('error_message', '获取店长信息失败。');
 							}
-						}
-						else {
+						} else {
 							$this->assign('error_message', '抱歉！只允许超级管理员进行登录。');
 						}
 					}
@@ -216,6 +214,7 @@ class privilege extends ecjia_merchant {
 		} else {
 			$this->assign('error_message', '抱歉！数据丢失，登陆失败。');
 		}
+		RC_Session::destroy();
 		$this->display('auto_error.dwt');
 	}
 }
