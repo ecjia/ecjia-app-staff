@@ -180,7 +180,7 @@ class privilege extends ecjia_merchant {
 		parse_str($authcode_decrypt, $authcode_array);
 		$start_time  = $authcode_array['time'];
 		$store_id    = $authcode_array['store_id'];
-		$admin_token = $authcode_array['admin_token'];
+		$session_id = $authcode_array['admin_token'];
 		
 		$time = RC_Time::gmtime();
 		$time_gap = $time - $start_time;
@@ -188,10 +188,9 @@ class privilege extends ecjia_merchant {
 		$cookie_name = RC_Config::get('session.session_admin_name');
 		$ecjia_admin_token = $_COOKIE[$cookie_name];
 		if (intval($time_gap) < 30) {
-			if ($admin_token == $ecjia_admin_token) {
-				$session_id = substr($admin_token, 0, 32);
-				$adminid = RC_DB::TABLE('sessions')->where('sesskey', $session_id)->pluck('adminid');
-				$action_list = RC_DB::TABLE('admin_user')->where('user_id', $adminid)->pluck('action_list');
+			if ($session_id == $ecjia_admin_token) {
+				$session_data = RC_Session::session()->get_session_data($session_id);
+				$action_list = RC_DB::TABLE('admin_user')->where('user_id', $session_data['admin_id'])->pluck('action_list');
 				if ($action_list == 'all') {
 					$staff_info = RC_DB::TABLE('staff_user')->where('store_id', $store_id)->where('parent_id', 0)->where('action_list', 'all')->first();
 					if (!empty($staff_info)) {
