@@ -57,4 +57,21 @@ function assign_adminlog_content() {
 	ecjia_admin_log::instance()->add_object('staff_group', '员工组');
 }
 
+function get_staff_info($user_id, $store_id) {
+    if (empty($user_id)) {
+        $user_id = $_SESSION['staff_id'];
+    }
+    if (empty($store_id)) {
+        $store_id = $_SESSION['store_id'];
+    }
+    
+    $info = RC_DB::table('staff_user')->where('user_id', $user_id)->where('store_id', $store_id)->first();
+    if ($info) {
+        $info['avatar'] = $info['avatar'] ? RC_Upload::upload_url($info['avatar']) : RC_Uri::admin_url('statics/images/admin_avatar.png');
+        $info['group_name'] = RC_DB::table('staff_group')->where('group_id', $info['group_id'])->where('store_id', $info['store_id'])->pluck('group_name');
+     }
+    
+    return $info;
+}
+
 //end
