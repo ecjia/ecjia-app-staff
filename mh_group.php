@@ -92,13 +92,16 @@ class mh_group extends ecjia_merchant {
 
 	    $staff_group_list = $this->staff_group_list($_SESSION['store_id']);
 	    $this->assign('staff_group_list', $staff_group_list);
-	    
+	   	$staff_count['express']      =  RC_DB::table('staff_user')->where('group_id', -1)->count();
+	   	$staff_count['cashdesk']     =  RC_DB::table('staff_user')->where('group_id', -2)->count();
+	   	$staff_count['unclassified'] =  RC_DB::table('staff_user')->where('group_id', 0)->where('parent_id', '>', 0)->count();
+	   	$this->assign('staff_count', $staff_count);
+	   	
 	    $this->assign('staff_admin',  	RC_App::apps_url('statics/images/staff_admin.png', __FILE__));
 	    $this->assign('staff_cashdesk', RC_App::apps_url('statics/images/staff_cashdesk.png', __FILE__));
 	    $this->assign('staff_express',  RC_App::apps_url('statics/images/staff_express.png', __FILE__));
 	    $this->assign('staff_plus',  	RC_App::apps_url('statics/images/staff_plus.png', __FILE__));
 	    $this->assign('staff_edit',  	RC_App::apps_url('statics/images/staff_edit.png', __FILE__));
-	    
 	    
 	    $this->display('staff_customize.dwt');
 	}
@@ -234,6 +237,7 @@ class mh_group extends ecjia_merchant {
 		$res = array();
 		if (!empty($data)) {
 			foreach ($data as $row) {
+				$row['staff_count'] = RC_DB::table('staff_user')->where('group_id', $row['group_id'])->count();
 				$res[] = $row;
 			}
 		}

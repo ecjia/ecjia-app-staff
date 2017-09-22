@@ -79,7 +79,7 @@
 			            	
                             <div class="task-thumb-details">
                                  <h4><strong>未分组</strong></h4>
-                                 <small class="label label-success">已有2个账号</small>
+                                 <span class="label label-success">已有<span class="staff-count">{$staff_count.unclassified}</span>个账号</span>
                             </div>  
                             
 			                <div class="title-realestates-columns">
@@ -111,7 +111,7 @@
 			           		
                             <div class="task-thumb-details">
                                  <h4><strong>配送员</strong></h4>
-                                 <small class="label label-success">已有2个账号</small>
+                                 <span class="label label-success">已有<span class="staff-count">{$staff_count.express}</span>个账号</span>
                             </div>  
                             
 			                <div class="title-realestates-columns">
@@ -142,7 +142,7 @@
 			            	</div>
                             <div class="task-thumb-details">
                                  <h4><strong>收银员</strong></h4>
-                                 <small class="label label-success">已有2个账号</small>
+                                 <span class="label label-success">已有<span class="staff-count">{$staff_count.cashdesk}</span>个账号</span>
                             </div> 
                             
 			                <div class="title-realestates-columns">
@@ -174,7 +174,7 @@
 				            	</div>
 	                            <div class="task-thumb-details">
 	                                 <h4><strong>{$list.group_name}</strong></h4>
-	                                 <small class="label label-success">已有2个账号</small>
+	                                 <span class="label label-success">已有<span class="staff-count">{$list.staff_count}</span>个账号</span>
 	                            </div> 
 	                            
 				                <div class="title-realestates-columns">

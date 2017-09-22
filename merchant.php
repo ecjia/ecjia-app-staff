@@ -123,6 +123,10 @@ class merchant extends ecjia_merchant {
 			$staff['group_name'] = RC_DB::TABLE('staff_group')->where('group_id', $staff['group_id'])->pluck('group_name');
 			if ($staff['group_id'] == -1) {
 				$staff['group_name'] = '配送员';
+			} elseif ($staff['group_id'] == -2) {
+				$staff['group_name'] = '收银员';
+			} else { 
+				$staff['group_name'] = '未分组';
 			}
 			$this->assign('staff', $staff);
 		}
