@@ -97,7 +97,7 @@ class merchant extends ecjia_merchant {
 		} elseif ($group_id == '-2') {
 			$group_name = '收银员';
 		} elseif ($group_id > 0){
-			$group_name = RC_DB::TABLE('staff_user')->where('group_id', $group_id)->pluck('group_name');
+			$group_name = RC_DB::TABLE('staff_group')->where('group_id', $group_id)->pluck('group_name');
 		} else {
 			$group_name = '未分组';
 		}
