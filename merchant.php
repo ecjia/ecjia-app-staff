@@ -91,7 +91,18 @@ class merchant extends ecjia_merchant {
 
 		$staff_list = $this->staff_list($group_id);
 		$this->assign('staff_list', $staff_list);
-		 
+		
+		if ($group_id == '-1') {
+			$group_name = '配送员';
+		} elseif ($group_id == '-2') {
+			$group_name = '收银员';
+		} elseif ($group_id > 0){
+			$group_name = RC_DB::TABLE('staff_user')->where('group_id', $group_id)->pluck('group_name');
+		} else {
+			$group_name = '未分组';
+		}
+		$this->assign('group_name', $group_name);
+		
 		$this->assign('search_action',RC_Uri::url('staff/merchant/init'));
 	
 		$this->display('staff_list.dwt');

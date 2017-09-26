@@ -11,7 +11,7 @@
 <div class="row">
 	<div class="col-lg-12">
 		<h2 class="page-header">
-			<!-- {if $ur_here}{$ur_here}{/if} -->
+			{$group_name} — <!-- {if $ur_here}{$ur_here}{/if} -->
 			<div class="pull-right">
 				{if $action_link_group}
 				<a href="{$action_link_group.href}" class="btn btn-primary data-pjax">

@@ -92,9 +92,9 @@ class mh_group extends ecjia_merchant {
 
 	    $staff_group_list = $this->staff_group_list($_SESSION['store_id']);
 	    $this->assign('staff_group_list', $staff_group_list);
-	   	$staff_count['express']      =  RC_DB::table('staff_user')->where('group_id', -1)->count();
-	   	$staff_count['cashdesk']     =  RC_DB::table('staff_user')->where('group_id', -2)->count();
-	   	$staff_count['unclassified'] =  RC_DB::table('staff_user')->where('group_id', 0)->where('parent_id', '>', 0)->count();
+	   	$staff_count['express']      =  RC_DB::table('staff_user')->where('group_id', -1)->where('store_id',$_SESSION['store_id'])->count();
+	   	$staff_count['cashdesk']     =  RC_DB::table('staff_user')->where('group_id', -2)->where('store_id',$_SESSION['store_id'])->count();
+	   	$staff_count['unclassified'] =  RC_DB::table('staff_user')->where('group_id', 0)->where('store_id',$_SESSION['store_id'])->where('parent_id', '>', 0)->count();
 	   	$this->assign('staff_count', $staff_count);
 	   	
 	    $this->assign('staff_admin',  	RC_App::apps_url('statics/images/staff_admin.png', __FILE__));
