@@ -173,7 +173,7 @@
 				            		<img src="{$staff_admin}" >
 				            	</div>
 	                            <div class="task-thumb-details">
-	                                 <h4><strong>{$list.group_name}</strong></h4>
+	                                 <h4><strong>{$list.group_name}<a href='{url path="staff/mh_group/edit" args="group_id={$list.group_id}"}'><img src="{$staff_edit}"></a></strong></h4>
 	                                 <span class="label label-success">已有<span class="staff-count">{$list.staff_count}</span>个账号</span>
 	                            </div> 
 	                            
@@ -212,6 +212,7 @@
 			            </div>
 			        </div>
 			    </div>
+			   	<span class="help-block">注：所有组的员工加起来最多只能添加10个员工</span> 
 	    	</div>
 		</div>
 	</div>

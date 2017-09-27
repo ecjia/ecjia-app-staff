@@ -14,6 +14,9 @@
     display: inline-block;
     margin: 13px 0 15px 20px;
 }
+.task-thumb-details img{
+   margin-left:5px;
+}
 .customize-img img{
 	float:left;
 }
@@ -33,3 +36,7 @@
 .staff-count{
 	margin:0 3px 0 5px;
 }
+.help-block{
+	margin-left:15px;
+}
+
