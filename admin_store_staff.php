@@ -88,13 +88,19 @@ class admin_store_staff extends ecjia_admin
     public function init()
     {
         $this->admin_priv('store_staff_manage');
-        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here(RC_Lang::get('store::store.view_staff')));
-
+        
         $store_id   = intval($_GET['store_id']);
         $main_staff = RC_DB::table('staff_user')->where('store_id', $store_id)->where('parent_id', 0)->first();
         $store      = RC_DB::table('store_franchisee')->where('store_id', $store_id)->first();
+        
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here($store['merchants_name'], RC_Uri::url('store/admin/preview', array('store_id' => $store_id))));
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here(RC_Lang::get('store::store.view_staff')));
+        
+        ecjia_screen::get_current_screen()->set_sidebar_display(false);
+        ecjia_screen::get_current_screen()->add_option('store_name', $store['merchants_name']);
+        ecjia_screen::get_current_screen()->add_option('current_code', 'store_view_staff');
+
         $parent_id  = $main_staff['user_id'];
-        $menu       = set_store_menu($store_id, 'view_staff');
         $staff_list = RC_DB::table('staff_user')->where('parent_id', $parent_id)->get();
 
         $main_staff['avatar']   = !empty($main_staff['avatar']) ? RC_Upload::upload_url($main_staff['avatar']) : RC_App::apps_url('statics/images/ecjia_avatar.jpg', __FILE__);
@@ -110,18 +116,24 @@ class admin_store_staff extends ecjia_admin
         $this->assign('current_url', RC_Uri::current_url());
 
         $this->assign('store', $store);
-        $this->assign('menu', $menu);
         $this->display('store_staff.dwt');
     }
 
     public function edit()
     {
         $this->admin_priv('store_staff_edit');
-        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('编辑店长'));
 
         $store_id   = intval($_GET['store_id']);
         $main_staff = intval($_GET['main_staff']);
         $store      = RC_DB::table('store_franchisee')->where('store_id', $store_id)->first();
+        
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here($store['merchants_name'], RC_Uri::url('store/admin/preview', array('store_id' => $store_id))));
+       	ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('编辑店长'));
+        
+        ecjia_screen::get_current_screen()->set_sidebar_display(false);
+        ecjia_screen::get_current_screen()->add_option('store_name', $store['merchants_name']);
+        ecjia_screen::get_current_screen()->add_option('current_code', 'store_view_staff');
+        
         if (empty($store)) {
             return $this->showmessage('店铺信息不存在！', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
@@ -130,8 +142,6 @@ class admin_store_staff extends ecjia_admin
         $this->assign('ur_here', $store['merchants_name'] . ' - 编辑店长');
 
         $this->assign('store', $store);
-        $menu = set_store_menu($store_id, 'view_staff');
-        $this->assign('menu', $menu);
 
         if ($main_staff == 1) {
             //店长
