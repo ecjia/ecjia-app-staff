@@ -79,7 +79,15 @@ class admin_store_staff extends ecjia_admin
         RC_Script::enqueue_script('store', RC_App::apps_url('statics/js/admin_store_staff.js', __FILE__));
         RC_Script::enqueue_script('qq_map', 'https://map.qq.com/api/js?v=2.exp');
 
-        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here(RC_Lang::get('store::store.store'), RC_Uri::url('store/admin/init')));
+        $store_id = intval($_GET['store_id']);
+        $store_info = RC_DB::table('store_franchisee')->where('store_id', $store_id)->first();
+        $nav_here = '入驻商家';
+        $url = RC_Uri::url('store/admin/join');
+        if ($store_info['manage_mode'] == 'self') {
+        	$nav_here = '自营店铺';
+        	$url = RC_Uri::url('store/admin/init');
+        }
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here($nav_here, $url));
     }
 
     /**
@@ -109,7 +117,11 @@ class admin_store_staff extends ecjia_admin
             $staff_list[$key]['add_time'] = RC_Time::local_date('Y-m-d', $val['add_time']);
         }
 
-        $this->assign('action_link', array('href' => RC_Uri::url('store/admin/init'), 'text' => RC_Lang::get('store::store.store_list')));
+       	if ($store['manage_mode'] == 'self') {
+        	$this->assign('action_link', array('href' => RC_Uri::url('store/admin/init'), 'text' => '自营店铺列表'));
+        } else {
+        	$this->assign('action_link', array('href' => RC_Uri::url('store/admin/join'), 'text' => RC_Lang::get('store::store.store_list')));
+        }
         $this->assign('ur_here', $store['merchants_name'] . ' - ' . RC_Lang::get('store::store.view_staff'));
         $this->assign('main_staff', $main_staff);
         $this->assign('staff_list', $staff_list);
@@ -137,10 +149,8 @@ class admin_store_staff extends ecjia_admin
         if (empty($store)) {
             return $this->showmessage('店铺信息不存在！', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
-
-        $this->assign('action_link', array('href' => RC_Uri::url('store/admin/init'), 'text' => RC_Lang::get('store::store.store_list')));
+        $this->assign('action_link', array('href' => RC_Uri::url('staff/admin_store_staff/init', array('store_id' => $store_id)), 'text' => '查看员工'));
         $this->assign('ur_here', $store['merchants_name'] . ' - 编辑店长');
-
         $this->assign('store', $store);
 
         if ($main_staff == 1) {
