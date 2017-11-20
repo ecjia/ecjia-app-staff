@@ -103,6 +103,7 @@
 				var province = $('select[name="province"]').val(),
 					city = $('select[name="city"]').val(),
 					district = $('select[name="district"]').val(),
+					street = $('select[name="street"]').val(),
 					address = $('input[name="address"]').val(),
 					url = $(this).attr('data-url');
 
@@ -110,6 +111,7 @@
 					'province': province,
 					'city': city,
 					'district': district,
+					'street': street,
 					'address': address,
 				}
 				$.post(url, option, app.store_edit.sethash, "JSON");
