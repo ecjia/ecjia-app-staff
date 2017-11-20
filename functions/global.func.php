@@ -57,7 +57,7 @@ function assign_adminlog_content() {
 	ecjia_admin_log::instance()->add_object('staff_group', '员工组');
 }
 
-function get_staff_info($user_id, $store_id) {
+function get_staff_info($user_id = 0, $store_id = 0) {
     if (empty($user_id)) {
         $user_id = $_SESSION['staff_id'];
     }
