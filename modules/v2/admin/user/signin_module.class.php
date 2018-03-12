@@ -64,7 +64,7 @@ class signin_module extends api_admin implements api_interface {
 			return $result;
 		}
 		
-		if (version_compare($api_version, '1.14.0', '>=')) {
+		if (version_compare($api_version, '1.14', '>=')) {
 			$user_count = RC_DB::table('staff_user')->where('mobile', $username)->count();
 			if ($user_count > 1) {
 				return new ecjia_error('user_repeat', '用户重复，请与管理员联系！');
@@ -114,7 +114,7 @@ function signin_merchant($username, $password, $device, $api_version) {
     
     /* 检查密码是否正确 */
     $db_staff_user = RC_DB::table('staff_user')->selectRaw('user_id, mobile, name, store_id, nick_name, email, last_login, last_ip, action_list, avatar, group_id, online_status');
-    if (version_compare($api_version, '1.14.0', '>=')) {
+    if (version_compare($api_version, '1.14', '>=')) {
     	$db_staff_user->where('mobile', $username);
     } else {
     	if (!empty($salt)) {
