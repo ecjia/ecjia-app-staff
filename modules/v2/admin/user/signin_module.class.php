@@ -71,12 +71,12 @@ class signin_module extends api_admin implements api_interface {
 			}
 			//短信验证码验证，$username手机号，$password短信验证码
 			//判断校验码是否过期
-			if (!empty($username) && (!isset($_SESSION['bindcode_lifetime']) || $_SESSION['bindcode_lifetime'] + 180 < RC_Time::gmtime())) {
+			if (!empty($username) && (!isset($_SESSION['sms_code_lifetime']) || $_SESSION['sms_code_lifetime'] + 180 < RC_Time::gmtime())) {
 				//过期
 				return new ecjia_error('code_timeout', '验证码已过期，请重新获取！');
 			}
 			//判断校验码是否正确
-			if (!empty($username) && (!isset($_SESSION['bindcode_lifetime']) || $password != $_SESSION['bind_code'] )) {
+			if (!empty($username) && (!isset($_SESSION['sms_code_lifetime']) || $password != $_SESSION['sms_code'] )) {
 				return new ecjia_error('code_error', '验证码错误，请重新填写！');
 			}
 		}
