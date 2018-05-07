@@ -47,18 +47,90 @@
 defined('IN_ECJIA') or exit('No permission resources.');
 
 /**
- * 商家员工管理
+ * 查询会员信息(返回列表)
+ * @author will.chen
  */
-return array(
-	'identifier' 	=> 'ecjia.staff',
-	'directory' 	=> 'staff',
-	'name'			=> 'staff',
-	'description' 	=> 'staff_desc',			/* 描述对应的语言项 */
-	'author' 		=> 'ECJIA TEAM',			/* 作者 */
-	'website' 		=> 'http://www.ecjia.com',	/* 网址 */
-	'version' 		=> '1.16.0',					/* 版本号 */
-	'copyright' 	=> 'ECJIA Copyright 2015.',
+class search_module extends api_admin implements api_interface {
+    public function handleRequest(\Royalcms\Component\HttpKernel\Request $request) {
+    		
+		$this->authadminSession();
+		if ($_SESSION['admin_id'] <= 0 && $_SESSION['staff_id'] <= 0) {
+		    return new ecjia_error(100, 'Invalid session');
+		}
+		
+		//$result = $this->admin_priv('users_manage');
+		//if (is_ecjia_error($result)) {
+		//	return $result;
+		//}
+		
+		$keywords = $this->requestData('keywords');
+		if (empty($keywords)) {
+			return new ecjia_error(101, '参数错误');
+		}
+		
+		$db_user = RC_Model::model('user/user_viewmodel');
+		$db_user->view = array(
+				'user_rank' => array(
+						'type'		=> Component_Model_View::TYPE_LEFT_JOIN,
+						'alias'		=> 'r',
+						'field'		=> '',
+						'on'		=> 'u.user_rank = r.rank_id'
+				),
+				'user_address' => array(
+						'type'		=> Component_Model_View::TYPE_LEFT_JOIN,
+						'alias'		=> 'ua',
+						'field'		=> '',
+						'on'		=> 'u.address_id=ua.address_id'
+				)
+		);
+		
+		$where = array(
+				'user_name' => array('like' => '%'. $keywords . '%'), 
+				'OR', 
+				'mobile_phone' => array('like' => '%'. $keywords . '%')
+		);
 
-);
+		$arr = $db_user->join(array('user_rank','user_address'))
+						->field('u.user_id, user_name, u.address_id, u.reg_time, avatar_img, user_rank, u.email, mobile_phone, r.rank_name, u.user_money, pay_points, country, province, city, district, street, address')
+						->where($where)
+						->select();
+		$user_search = array();
+		if (!empty($arr)) {
+			foreach ($arr as $k => $v){
+// 				$uid = sprintf("%09d", $v['user_id']);//格式化uid字串， d 表示把uid格式为9位数的整数，位数不够的填0
+				
+// 				$dir1 = substr($uid, 0, 3);//把uid分段
+// 				$dir2 = substr($uid, 3, 2);
+// 				$dir3 = substr($uid, 5, 2);
+				
+// 				$filename    = md5($v['user_name']);
+// 				$avatar_path = RC_Upload::upload_path().'/data/avatar/'.$dir1.'/'.$dir2.'/'.$dir3.'/'.substr($uid, -2)."_".$filename.'.jpg';
+// 				$disk = RC_Filesystem::disk();
+// 				if(!$disk->exists($avatar_path)) {
+// 					$avatar_img = '';
+// 				} else {
+// 					$avatar_img = RC_Upload::upload_url().'/data/avatar/'.$dir1.'/'.$dir2.'/'.$dir3.'/'.substr($uid, -2)."_".$filename.'.jpg';
+// 				}
+				
+				$address = $v['address_id'] > 0 ? ecjia_region::getRegionName($v['city']).ecjia_region::getRegionName($v['district']).ecjia_region::getRegionName($v['street']) : '';
+				$user_search[] = array(
+					'id'			=>	$v['user_id'],
+					'name'			=>	$v['user_name'],
+					'rank_name'		=>	$v['rank_name'],
+					'email'			=>	$v['email'],
+					'mobile_phone'	=>	$v['mobile_phone'],
+					'formatted_user_money' =>	price_format($v['user_money'],false),
+					'user_points'	=>	$v['pay_points'],
+					'user_money'	=>	$v['user_money'],
+					'address'		=>	$address,
+					'avatar_img'	=>	$v['avatar_img'] ? RC_Upload::upload_url($v['avatar_img']) : '',
+					'reg_time'		=>   RC_Time::local_date(ecjia::config('time_format'), $v['reg_time']),
+				);
+			}
+		}
+		
+		return $user_search;
+	}
+}
 
 // end

@@ -47,18 +47,47 @@
 defined('IN_ECJIA') or exit('No permission resources.');
 
 /**
- * 商家员工管理
+ * 
+ * @author will
  */
-return array(
-	'identifier' 	=> 'ecjia.staff',
-	'directory' 	=> 'staff',
-	'name'			=> 'staff',
-	'description' 	=> 'staff_desc',			/* 描述对应的语言项 */
-	'author' 		=> 'ECJIA TEAM',			/* 作者 */
-	'website' 		=> 'http://www.ecjia.com',	/* 网址 */
-	'version' 		=> '1.16.0',					/* 版本号 */
-	'copyright' 	=> 'ECJIA Copyright 2015.',
-
-);
+class validate_module extends api_admin implements api_interface {
+    public function handleRequest(\Royalcms\Component\HttpKernel\Request $request) {
+    	
+		$validate_type	= $this->requestData('validate_type');
+    	$validate_value = $this->requestData('validate_value');
+		
+		if (empty($validate_type) || empty($validate_value)) {
+			return new ecjia_error( 'invalid_parameter', RC_Lang::get ('system::system.invalid_parameter'));
+		}
+		
+		$code = rand(100000, 999999);
+		$response = '';
+		if ($validate_type == 'mobile') {
+		    //发送短信
+		    $options = array(
+		        'mobile' => $validate_value,
+		        'event'	 => 'sms_get_validate',
+		        'value'  =>array(
+		            'code' 			=> $code,
+		            'service_phone' => ecjia::config('service_phone'),
+		        ),
+		    );
+		    RC_Api::api('sms', 'send_event_sms', $options);
+		}
+		
+		$time = RC_Time::gmtime();
+		$_SESSION['adminuser_validate_value']	= $validate_value;
+		$_SESSION['adminuser_validate_code']	= $code;
+		$_SESSION['adminuser_validate_expiry']	= $time + 600;//设置有效期10分钟
+		
+		/* 判断是否发送成功*/
+		if (is_ecjia_error($response)) {
+			return new ecjia_error('send_code_error', __('验证码发送失败！'));
+		} else {
+			return array('data' => '验证码发送成功！');
+		}
+		
+	}
+}
 
 // end

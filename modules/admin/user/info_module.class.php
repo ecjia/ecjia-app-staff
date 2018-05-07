@@ -44,21 +44,32 @@
 //
 //  ---------------------------------------------------------------------------------
 //
+
 defined('IN_ECJIA') or exit('No permission resources.');
-
 /**
- * 商家员工管理
+ * 用户信息
+ * @author royalwang
+ *
  */
-return array(
-	'identifier' 	=> 'ecjia.staff',
-	'directory' 	=> 'staff',
-	'name'			=> 'staff',
-	'description' 	=> 'staff_desc',			/* 描述对应的语言项 */
-	'author' 		=> 'ECJIA TEAM',			/* 作者 */
-	'website' 		=> 'http://www.ecjia.com',	/* 网址 */
-	'version' 		=> '1.16.0',					/* 版本号 */
-	'copyright' 	=> 'ECJIA Copyright 2015.',
-
-);
+class info_module extends api_admin implements api_interface {
+    public function handleRequest(\Royalcms\Component\HttpKernel\Request $request) {
+		$this->authadminSession();
+		
+		if ($_SESSION['admin_id'] <= 0 && $_SESSION['staff_id'] <= 0) {
+		    return new ecjia_error(100, 'Invalid session');
+		}
+		
+		$user_id = $this->requestData('user_id', 0);
+		$mobile	 = $this->requestData('mobile', '');
+		if (empty($user_id) && empty($mobile)) {
+			return new ecjia_error('invalid_parameter', '错误的参数提交');
+		}
+		
+		RC_Loader::load_app_func('admin_user', 'user');
+		$user_info = EM_user_info($user_id, $mobile);
+		
+		return $user_info;
+	}
+}
 
 // end

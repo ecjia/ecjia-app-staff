@@ -47,18 +47,85 @@
 defined('IN_ECJIA') or exit('No permission resources.');
 
 /**
- * 商家员工管理
+ * 用户 头像上传
+ * @author royalwang
  */
-return array(
-	'identifier' 	=> 'ecjia.staff',
-	'directory' 	=> 'staff',
-	'name'			=> 'staff',
-	'description' 	=> 'staff_desc',			/* 描述对应的语言项 */
-	'author' 		=> 'ECJIA TEAM',			/* 作者 */
-	'website' 		=> 'http://www.ecjia.com',	/* 网址 */
-	'version' 		=> '1.16.0',					/* 版本号 */
-	'copyright' 	=> 'ECJIA Copyright 2015.',
-
-);
+class update_module extends api_admin implements api_interface {
+    public function handleRequest(\Royalcms\Component\HttpKernel\Request $request) {
+    	
+    	if ($_SESSION['admin_id' ] <= 0 && $_SESSION['staff_id'] <= 0) {
+            return new ecjia_error(100, 'Invalid session');
+        }
+		
+		$user_name = $this->requestData('username');
+		$nickname = $this->requestData('nickname');
+		$old_password = $this->requestData('old_password');
+		$new_password = $this->requestData('new_password');
+		
+		if ($_SESSION['staff_id']) {
+			/* 修改头像*/
+			if (isset($_FILES['avatar_img'])) {
+			    
+			    $store_id = $_SESSION['store_id'];
+				$save_path = 'merchant/'.$store_id.'/data/avatar';
+				$upload = RC_Upload::uploader('image', array('save_path' => $save_path, 'auto_sub_dirs' => true));
+					
+				$image_info	= $upload->upload($_FILES['avatar_img']);
+				/* 判断是否上传成功 */
+				if (!empty($image_info)) {
+					$avatar_img = $upload->get_position($image_info);
+					$old_avatar_img = RC_DB::table('staff_user')->where('user_id', $_SESSION['staff_id'])->pluck('avatar');
+					if (!empty($old_avatar_img)) {
+						$upload->remove($old_avatar_img);
+					}
+					RC_DB::table('staff_user')->where('user_id', $_SESSION['staff_id'])->update(array('avatar' => $avatar_img));
+				} else {
+					return new ecjia_error('avatar_img_error', '头像上传失败！');
+				}
+			}
+			/* 修改用户名*/
+			if (!empty($user_name)) {
+				RC_DB::table('staff_user')->where('user_id', $_SESSION['staff_id'])->update(array('name' => $user_name));
+				$_SESSION['staff_name']		= $user_name;
+			}
+			
+			/* 修改用户名*/
+			if (!empty($nickname)) {
+			    if (RC_DB::table('staff_user')->where('user_id', '<>', $_SESSION['staff_id'])->where('nick_name', $nickname)->count()) {
+			        return new ecjia_error('nickname_exists', '昵称已被占用，请修改！');
+			    }
+			    RC_DB::table('staff_user')->where('user_id', $_SESSION['staff_id'])->update(array('nick_name' => $nickname));
+			    $_SESSION['nick_name']		= $nickname;
+			}
+			
+			/* 修改登录密码*/
+			if (!empty($old_password) && !empty($new_password)) {
+				/* 查询旧密码并与输入的旧密码比较是否相同 */
+				$db_old_password	= RC_DB::table('staff_user')->where('user_id', $_SESSION['staff_id'])->pluck('password');
+				$old_ec_salt		= RC_DB::table('staff_user')->where('user_id', $_SESSION['staff_id'])->pluck('salt');
+				
+				if (empty($old_ec_salt)) {
+					$old_ec_password = md5($old_password);
+				} else {
+					$old_ec_password = md5(md5($old_password).$old_ec_salt);
+				}
+				if ($db_old_password != $old_ec_password) {
+					return new ecjia_error('old_password_error', '输入的旧密码错误！');
+				}
+				
+				if ($db_old_password == md5(md5($new_password).$old_ec_salt)) {
+					return new ecjia_error('new_password_error', '新密码与原始密码相同！');
+				}
+				
+				$salt		= rand(1, 9999);
+				$password	= md5(md5($new_password) . $salt);
+				RC_DB::table('staff_user')->where('user_id', $_SESSION['staff_id'])->update(array('password' => $password, 'salt' => $salt));
+			}
+		}
+		
+ 		return array();
+ 		
+	}
+}
 
 // end
