@@ -40,11 +40,7 @@ ecjia.merchant.staff_info.init();
   <div class="col-lg-12">
       <section class="panel">
           <div class="panel-body">
-          		<ul id="myTab" class="nav nav-tabs m_b20">
-                	<li class="active"><a href="javascript:;" data-toggle="tab">商家后台权限</a></li>
-   					<li><a class="data-pjax" href='{url path="platform/merchant/allot"}&user_id={$user_id}'>公众平台权限</a></li>
-    			</ul>
-                                
+    		  <!-- {ecjia:hook id=display_merchant_privilege_menus} -->
               <div class="form">
                   <form class="cmxform form-horizontal tasi-form" name="theForm" method="post" action="{$form_action}">
 					  <div class="row priv_list">
