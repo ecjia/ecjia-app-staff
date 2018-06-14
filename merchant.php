@@ -394,6 +394,8 @@ class merchant extends ecjia_merchant
         $this->admin_priv('staff_allot');
 
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('员工分派权限'));
+        ecjia_screen::get_current_screen()->add_option('current_code', 'merchant_privilege_menu');
+        
         $this->assign('action_link', array('href' => RC_Uri::url('staff/merchant/init'), 'text' => '账户列表'));
 
         $priv_row  = RC_DB::table('staff_user')->where('user_id', $_GET['user_id'])->select('name', 'action_list')->first();
