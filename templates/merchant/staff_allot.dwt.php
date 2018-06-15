@@ -3,7 +3,7 @@
 
 <!-- {block name="footer"} -->
 <script type="text/javascript">
-ecjia.merchant.staff_info.init();
+	ecjia.merchant.staff_info.theForm();
 </script>
 <!-- {/block} -->
 <!-- {block name="home-content"} -->
@@ -19,7 +19,6 @@ ecjia.merchant.staff_info.init();
     padding-left: 30px;
     width: 150px;
 }
-
 .priv_list .group_children{
    overflow: hidden;
 }

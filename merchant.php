@@ -393,19 +393,20 @@ class merchant extends ecjia_merchant
     {
         $this->admin_priv('staff_allot');
 
-        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('员工分派权限'));
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('分派权限'));
         ecjia_screen::get_current_screen()->add_option('current_code', 'merchant_privilege_menu');
         
+        $user_id = intval($_GET['user_id']);
         $this->assign('action_link', array('href' => RC_Uri::url('staff/merchant/init'), 'text' => '账户列表'));
 
-        $priv_row  = RC_DB::table('staff_user')->where('user_id', $_GET['user_id'])->select('name', 'action_list')->first();
+        $priv_row  = RC_DB::table('staff_user')->where('store_id', $_SESSION['store_id'])->where('user_id', $user_id)->select('name', 'action_list')->first();
         $user_name = $priv_row['name'];
         $priv_str  = $priv_row['action_list'];
 
         $priv_group = ecjia_merchant_purview::load_purview($priv_str);
         $this->assign('priv_group', $priv_group);
 
-        $this->assign('ur_here', sprintf(__('分派权限 [ %s ] '), $user_name));
+        $this->assign('ur_here', sprintf(__('分派后台权限 [ %s ] '), $user_name));
         $this->assign('user_id', $_GET['user_id']);
 
         $this->assign('form_action', RC_Uri::url('staff/merchant/update_allot'));

@@ -56,6 +56,11 @@
     
     app.staff_info = {
         init: function () {
+        	app.staff_info.setTime();
+        	app.staff_info.theForm();
+        },
+        
+        setTime: function () {
         	var InterValObj; //timer变量，控制时间
     		var count = 120; //间隔函数，1秒执行
     		var curCount;//当前剩余秒数
@@ -88,7 +93,9 @@
 	                $("#get_code").val("重新发送" + curCount + "(s)");
 	            }
 	        };
-         
+        },
+        
+        theForm: function() {
             var $form = $("form[name='theForm']");
 			var option = {
 		            rules: {
