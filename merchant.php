@@ -399,10 +399,14 @@ class merchant extends ecjia_merchant
         $user_id = intval($_GET['user_id']);
         $this->assign('action_link', array('href' => RC_Uri::url('staff/merchant/init'), 'text' => '账户列表'));
 
-        $priv_row  = RC_DB::table('staff_user')->where('store_id', $_SESSION['store_id'])->where('user_id', $user_id)->select('name', 'action_list')->first();
-        $user_name = $priv_row['name'];
-        $priv_str  = $priv_row['action_list'];
-
+//         $priv_row  = RC_DB::table('staff_user')->where('store_id', $_SESSION['store_id'])->where('user_id', $user_id)->select('name', 'action_list')->first();
+//         $user_name = $priv_row['name'];
+//         $priv_str  = $priv_row['action_list'];
+        
+        $user = new Ecjia\App\Merchant\Frameworks\Users\StaffUser($user_id, session('store_id'), '\Ecjia\App\Merchant\Frameworks\Users\StaffUserDefaultAllotPurview');
+        $user_name = $user->getUserName();
+        $priv_str = $user->getActionList();
+        
         $priv_group = ecjia_merchant_purview::load_purview($priv_str);
         $this->assign('priv_group', $priv_group);
 
@@ -420,14 +424,22 @@ class merchant extends ecjia_merchant
     public function update_allot()
     {
         $this->admin_priv('staff_allot', ecjia::MSGTYPE_JSON);
+        
+        $user_id = $this->request->input('user_id');
+        
+        $user = new Ecjia\App\Merchant\Frameworks\Users\StaffUser($user_id, session('store_id'), '\Ecjia\App\Merchant\Frameworks\Users\StaffUserDefaultAllotPurview');
+        $name = $user->getUserName();
 
-        $name        = RC_DB::table('staff_user')->where('user_id', $_POST['user_id'])->pluck('name');
+//         $name        = RC_DB::table('staff_user')->where('user_id', $_POST['user_id'])->pluck('name');
         $action_list = join(',', $_POST['action_code']);
-        $data        = array(
-            'action_list' => $action_list,
-            'group_id'    => '',
-        );
-        RC_DB::table('staff_user')->where('user_id', $_POST['user_id'])->update($data);
+//         $data        = array(
+//             'action_list' => $action_list,
+//             'group_id'    => '',
+//         );
+        
+        $user->setActionList($action_list);
+        
+//         RC_DB::table('staff_user')->where('user_id', $_POST['user_id'])->update($data);
         ecjia_merchant::admin_log($name, 'edit', 'staff');
 
         return $this->showmessage(sprintf(__('编辑 %s 员工权限操作成功'), $name), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('staff/merchant/allot', array('user_id' => $_POST['user_id']))));
