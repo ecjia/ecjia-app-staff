@@ -286,7 +286,6 @@ class merchant extends ecjia_merchant
         ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here(RC_Lang::get('staff::staff.staff_update')));
 
         $this->assign('ur_here', RC_Lang::get('staff::staff.staff_update'));
-        $this->assign('action_link', array('href' => RC_Uri::url('staff/mh_group/init'), 'text' => '员工管理'));
 
         $manage_id = RC_DB::table('staff_user')->where('user_id', $_SESSION['staff_id'])->pluck('parent_id');
         $this->assign('manage_id', $manage_id);
@@ -296,6 +295,11 @@ class merchant extends ecjia_merchant
         if (empty($staff)) {
             return $this->showmessage('该员工不存在', ecjia::MSGTYPE_HTML | ecjia::MSGSTAT_ERROR);
         }
+        $return_url = RC_Uri::url('staff/merchant/init');
+        if (!empty($staff['group_id'])) {
+        	$return_url = RC_Uri::url('staff/merchant/init', array('group_id' => $staff['group_id']));
+        }
+        $this->assign('action_link', array('href' => $return_url, 'text' => '账户列表'));
 
         $staff['add_time'] = RC_Time::local_date('Y-m-d', $staff['add_time']);
         $this->assign('staff', $staff);
@@ -397,15 +401,23 @@ class merchant extends ecjia_merchant
         ecjia_screen::get_current_screen()->add_option('current_code', 'merchant_privilege_menu');
         
         $user_id = intval($_GET['user_id']);
-        $this->assign('action_link', array('href' => RC_Uri::url('staff/merchant/init'), 'text' => '账户列表'));
-
-//         $priv_row  = RC_DB::table('staff_user')->where('store_id', $_SESSION['store_id'])->where('user_id', $user_id)->select('name', 'action_list')->first();
-//         $user_name = $priv_row['name'];
-//         $priv_str  = $priv_row['action_list'];
         
         $user = new Ecjia\App\Merchant\Frameworks\Users\StaffUser($user_id, session('store_id'), '\Ecjia\App\Merchant\Frameworks\Users\StaffUserDefaultAllotPurview');
         $user_name = $user->getUserName();
         $priv_str = $user->getActionList();
+        $group_id = $user->getRoleId();
+        
+        $return_href = RC_Uri::url('staff/merchant/init');
+        if (!empty($group_id)) {
+        	$return_href = RC_Uri::url('staff/merchant/init', array('group_id' => $group_id));
+        }
+        $this->assign('action_link', array('href' => $return_href, 'text' => '账户列表'));
+        
+        /* 如果被编辑的管理员拥有了all这个权限，将不能编辑 */
+        if ($priv_str == 'all') {
+        	$link[] = array('text' => __('返回账户列表'), 'href' => $return_href);
+        	return $this->showmessage(__('您不能对此管理员的权限进行任何操作！'), ecjia::MSGTYPE_HTML | ecjia::MSGSTAT_ERROR, array('links' => $link));
+        }
         
         $priv_group = ecjia_merchant_purview::load_purview($priv_str);
         $this->assign('priv_group', $priv_group);
@@ -430,19 +442,12 @@ class merchant extends ecjia_merchant
         $user = new Ecjia\App\Merchant\Frameworks\Users\StaffUser($user_id, session('store_id'), '\Ecjia\App\Merchant\Frameworks\Users\StaffUserDefaultAllotPurview');
         $name = $user->getUserName();
 
-//         $name        = RC_DB::table('staff_user')->where('user_id', $_POST['user_id'])->pluck('name');
         $action_list = join(',', $_POST['action_code']);
-//         $data        = array(
-//             'action_list' => $action_list,
-//             'group_id'    => '',
-//         );
-        
         $user->setActionList($action_list);
         
-//         RC_DB::table('staff_user')->where('user_id', $_POST['user_id'])->update($data);
         ecjia_merchant::admin_log($name, 'edit', 'staff');
 
-        return $this->showmessage(sprintf(__('编辑 %s 员工权限操作成功'), $name), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('staff/merchant/allot', array('user_id' => $_POST['user_id']))));
+        return $this->showmessage(sprintf(__('编辑 %s 员工权限操作成功'), $name), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('staff/merchant/allot', array('user_id' => $user_id))));
     }
 
     /**

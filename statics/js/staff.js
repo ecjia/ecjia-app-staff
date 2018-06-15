@@ -42,7 +42,6 @@
 						$form.ajaxSubmit({
 							dataType : "json",
 							success : function(data) {
-								top.location.reload();
 								ecjia.merchant.showmessage(data);
 							}
 						});
