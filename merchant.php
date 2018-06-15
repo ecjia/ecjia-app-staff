@@ -410,7 +410,7 @@ class merchant extends ecjia_merchant
         $priv_group = ecjia_merchant_purview::load_purview($priv_str);
         $this->assign('priv_group', $priv_group);
 
-        $this->assign('ur_here', sprintf(__('分派后台权限 [ %s ] '), $user_name));
+        $this->assign('ur_here', sprintf(__('分派商家后台权限 [ %s ] '), $user_name));
         $this->assign('user_id', $_GET['user_id']);
 
         $this->assign('form_action', RC_Uri::url('staff/merchant/update_allot'));
