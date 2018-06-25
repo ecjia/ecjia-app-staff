@@ -269,6 +269,21 @@ class merchant extends ecjia_merchant
         		'apply_source' => 'merchant',
         	);
         	RC_DB::table('express_user')->insertGetId($data_express);
+        	//短信发送通知
+        	$store_name = $_SESSION['store_name'];
+        	$password = empty($_POST['password']) ? '' : $_POST['password'];
+        	
+        	$options = array(
+        			'mobile' => $_SESSION['mobile'],
+        			'event'	 => 'sms_store_express_added',
+        			'value'  =>array(
+        					'user_name'	 => $_POST['name'],
+        					'store_name' => $store_name,
+        					'account'	 => $_SESSION['mobile'],
+        					'password'	 => $password,
+        			),
+        	);
+        	$response = RC_Api::api('sms', 'send_event_sms', $options);
         }
         
         ecjia_merchant::admin_log($_POST['name'], 'add', 'staff');
