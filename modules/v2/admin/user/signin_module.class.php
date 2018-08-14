@@ -60,7 +60,8 @@ class signin_module extends api_admin implements api_interface {
 		$api_version = $this->request->header('api-version');
 		$login_type = $this->requestData('type', 'password');
 		$login_type_array = array('smslogin', 'password');
-		//$device = array('code'=> '8001', 'udid' => 'bdc0525eebad246de659a7d0ac39fe834d198c5f', 'client' => 'android');
+		//$device = array('code'=> '8001', 'udid' => '4adbe6e37384dc8f085c908f5ae2c093f5bb694f', 'client' => 'android');
+		
 		if (empty($username) || empty($password)) {
 			$result = new ecjia_error('login_error', __('您输入的帐号信息不正确'));
 			return $result;
@@ -104,7 +105,7 @@ class signin_module extends api_admin implements api_interface {
 	}
 }
 
-function signin_merchant($username, $password, $device, $api_version, $login_type) {
+function signin_merchant($username, $password, $device, $api_version, $login_type = '') {
     /* 收银台请求判断处理*/
 	$codes = array('8001', '8011');
     if (!empty($device) && is_array($device) && in_array($device['code'], $codes)) {
@@ -118,7 +119,7 @@ function signin_merchant($username, $password, $device, $api_version, $login_typ
     } else {
         $salt = RC_DB::table('staff_user')->where('mobile', $username)->pluck('salt');
     }
-    
+   
     /* 检查密码是否正确 */
     $db_staff_user = RC_DB::table('staff_user')->selectRaw('user_id, mobile, name, store_id, nick_name, email, last_login, last_ip, action_list, avatar, group_id, online_status');
     if (version_compare($api_version, '1.14', '>=')) {
@@ -140,7 +141,7 @@ function signin_merchant($username, $password, $device, $api_version, $login_typ
     }
    
     $row = $db_staff_user->first();
-    
+   
     if ($row) {
         // 登录成功
         /* 设置session信息 */
@@ -281,7 +282,7 @@ function signin_merchant($username, $password, $device, $api_version, $login_typ
             	}
             }
         }
-         
+     
         return $out;
     } else {
         return new ecjia_error('login_error', __('您输入的帐号信息不正确'));
