@@ -92,6 +92,13 @@ class signin_module extends api_admin implements api_interface {
 		//根据用户名判断是商家还是平台管理员
 		//如果商家员工表存在，以商家为准
 		$row_staff = RC_DB::table('staff_user')->where('mobile', $username)->first();
+		//员工所在店铺有没被锁定；锁定不可登录
+		if ($row_staff['store_id']) {
+			$store_status 	= Ecjia\App\Cart\StoreStatus::GetStoreStatus($row_staff['store_id']);
+			if ($store_status == '2') {
+				return new ecjia_error('store_locked', '对不起，该店铺已锁定，请联系平台管理员！');
+			}
+		}
 		
 		if ($row_staff) {
 		    //商家
