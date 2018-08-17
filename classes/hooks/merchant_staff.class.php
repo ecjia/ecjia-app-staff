@@ -64,7 +64,7 @@ class merchant_staff_hooks {
 		$now = RC_Time::gmtime();
 
 		//本月开始时间
-		$start_month = mktime(0,0,0,date('m'),1,date('Y'))-8*3600;
+		$start_month = RC_Time::local_mktime(0, 0, 0, RC_Time::local_date('m'), 1, RC_Time::local_date('Y'));
 
 		RC_Loader::load_app_class('merchant_order_list', 'orders', false);
 		$order = new merchant_order_list();
@@ -99,7 +99,7 @@ class merchant_staff_hooks {
 			->count(RC_DB::raw('distinct order_id'));
 
 		//今日开始时间
-		$start_time = mktime(0,0,0,date('m'),date('d'),date('Y'))-8*3600;
+		$start_time = RC_Time::local_mktime(0, 0, 0, RC_Time::local_date('m'), RC_Time::local_date('d'), RC_Time::local_date('Y'));
 
 		//今日待确认订单
 		$order_unconfirmed = RC_DB::table('order_info as oi')
@@ -175,7 +175,7 @@ class merchant_staff_hooks {
 
 			if (!$count_list) {
 				$format = '%Y-%m-%d';
-				$time = (mktime(0,0,0,date('m'),date('d'),date('Y'))-1)-8*3600;
+				$time = (RC_Time::local_mktime(0, 0, 0, RC_Time::local_date('m'), RC_Time::local_date('d'), RC_Time::local_date('Y'))-1);
 				$start_time = $time - 30*86400;
 				$store_id = $_SESSION['store_id'];
 
@@ -190,7 +190,7 @@ class merchant_staff_hooks {
 				$days = $data = $count_list = array();
 
 				for ($i=30; $i>0; $i--) {
-					$days[] = date("Y-m-d", strtotime(' -'. $i . 'day'));
+					$days[] = RC_Time::local_date("Y-m-d", RC_Time::local_strtotime(' -'. $i . 'day'));
 				}
 
 				$max_count = 100;
