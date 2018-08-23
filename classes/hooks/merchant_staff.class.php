@@ -230,6 +230,32 @@ class merchant_staff_hooks {
 	    );
     }
 
+    //店铺首页 店铺资金 订单统计类型 平台配送 商家配送 促销活动 商品热卖榜
+	public static function merchant_dashboard_left_8_3() {
+		//店铺资金
+		$data = RC_DB::table('store_account')->where('store_id', $_SESSION['store_id'])->first();
+		if (empty($data)) {
+			$data['formated_amount_available'] = $data['formated_money'] = $data['formated_frozen_money'] = $data['formated_deposit'] = '￥0.00';
+			$data['amount_available'] = $data['money'] = $data['frozen_money'] = $data['deposit'] = '0.00';
+		} else {
+			$amount_available = $data['money'] - $data['deposit'];//可用余额=money-保证金
+			$data['formated_amount_available'] = price_format($amount_available);
+			$data['amount_available'] = $amount_available;
+				
+			$money = $data['money'] + $data['frozen_money'];//总金额=money+冻结
+			$data['formated_money'] = price_format($money);
+			$data['money'] = $money;
+				
+			$data['formated_frozen_money'] = price_format($data['frozen_money']);
+			$data['formated_deposit'] = price_format($data['deposit']);
+		}
+		ecjia_merchant::$controller->assign('data', $data);
+		
+		ecjia_merchant::$controller->display(
+		    RC_Package::package('app::staff')->loadTemplate('merchant/library/widget_merchant_dashboard_store_commission.lbi', true)
+		);
+    }
+
 	//商家公告
 	public static function merchant_dashboard_right_4_2() {
 		$list = RC_DB::table('article as a')
@@ -316,6 +342,7 @@ RC_Hook::add_action('merchant_dashboard_top', array('merchant_staff_hooks', 'mer
 
 RC_Hook::add_action('merchant_dashboard_left8', array('merchant_staff_hooks', 'merchant_dashboard_left_8_1'));
 RC_Hook::add_action('merchant_dashboard_left8', array('merchant_staff_hooks', 'merchant_dashboard_left_8_2'));
+RC_Hook::add_action('merchant_dashboard_left8', array('merchant_staff_hooks', 'merchant_dashboard_left_8_3'));
 
 RC_Hook::add_action('merchant_dashboard_right4', array('merchant_staff_hooks', 'merchant_dashboard_right_4_1'), 1);
 RC_Hook::add_action('merchant_dashboard_right4', array('merchant_staff_hooks', 'merchant_dashboard_right_4_2'),3);
