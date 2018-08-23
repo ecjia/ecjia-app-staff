@@ -95,7 +95,7 @@ class signin_module extends api_admin implements api_interface {
 		//员工所在店铺有没被锁定；锁定不可登录
 		if ($row_staff['store_id']) {
 			$store_status 	= Ecjia\App\Cart\StoreStatus::GetStoreStatus($row_staff['store_id']);
-			if ($store_status == '2') {
+			if ($store_status == Ecjia\App\Cart\StoreStatus::LOCKED) {
 				return new ecjia_error('store_locked', '对不起，该店铺已锁定，请联系平台管理员！');
 			}
 		}
@@ -125,6 +125,7 @@ function signin_merchant($username, $password, $device, $api_version, $login_typ
         $salt	    = $staff_user_info['salt'];
     } else {
         $salt = RC_DB::table('staff_user')->where('mobile', $username)->pluck('salt');
+        $salt = trim($salt);
     }
    
     /* 检查密码是否正确 */
@@ -134,16 +135,23 @@ function signin_merchant($username, $password, $device, $api_version, $login_typ
     		$db_staff_user->where('mobile', $username);
     	} else {
     		if (!empty($salt)) {
-    			$db_staff_user->where('mobile', $username)->where('password', md5(md5($password).$salt) );
+    			//md5(md5($password).$salt)
+    			$md5_password = md5($password);
+    			$password_final = md5($md5_password.$salt);
+    			$db_staff_user->where('mobile', $username)->where('password', $password_final);
     		} else {
-    			$db_staff_user->where('mobile', $username)->where('password', md5($password) );
+    			$db_staff_user->where('mobile', $username)->where('password', md5($password));
     		}
     	}
     } else {
     	if (!empty($salt)) {
-    		$db_staff_user->where('mobile', $username)->where('password', md5(md5($password).$salt) );
+    		//md5(md5($password).$salt)
+    		$md5_password = md5($password);
+    		$password_final = md5($md5_password.$salt);
+    		
+    		$db_staff_user->where('mobile', $username)->where('password',$password_final);
     	} else {
-    		$db_staff_user->where('mobile', $username)->where('password', md5($password) );
+    		$db_staff_user->where('mobile', $username)->where('password', md5($password));
     	}
     }
    
