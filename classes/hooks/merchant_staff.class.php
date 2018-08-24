@@ -131,9 +131,32 @@ class merchant_staff_hooks
             RC_Package::package('app::staff')->loadTemplate('merchant/library/widget_merchant_dashboard_notice.lbi', true)
         );
     }
+    
+    //商城消息
+    public static function merchant_dashboard_right_4_4()
+    {
+    	$list = RC_DB::table('notifications')
+    		->where('notifiable_id', $_SESSION['staff_id'])
+    		->whereNull('read_at')
+    		->orderBy('created_at', 'desc')
+    		->take(5)->get();
+		if (!empty($list)) {
+			foreach ($list as $k => $v) {
+				if (!empty($v['data'])) {
+					$content = json_decode($v['data'], true);
+					$list[$k]['content'] = $content['body'];
+				}
+			}
+		}
+    	ecjia_merchant::$controller->assign('list', $list);
+    	
+    	ecjia_merchant::$controller->display(
+    		RC_Package::package('app::staff')->loadTemplate('merchant/library/widget_merchant_dashboard_shopmsg.lbi', true)
+    	);
+    }
 
     //操作日志
-    public static function merchant_dashboard_right_4_4()
+    public static function merchant_dashboard_right_4_5()
     {
         if (!ecjia_merchant::$controller->admin_priv('staff_log_manage', ecjia::MSGTYPE_HTML, false)) {
             return false;
@@ -155,6 +178,28 @@ class merchant_staff_hooks
         ecjia_merchant::$controller->display(
             RC_Package::package('app::staff')->loadTemplate('merchant/library/widget_merchant_dashboard_loglist.lbi', true)
         );
+    }
+    
+    //快捷入口
+    public static function merchant_dashboard_right_4_6()
+    {
+    	$statics_url = ecjia_merchant::get_main_static_url();
+    	$list = array(
+    		array('title' => '商品列表', 'url' => RC_Uri::url('goods/merchant/init'), 'img' => $statics_url.'img/merchant_dashboard/goods_list.png'),
+    		array('title' => '验单查询', 'url' => RC_Uri::url('orders/mh_validate_order/init'), 'img' => $statics_url.'img/merchant_dashboard/validate_order.png'),
+    		array('title' => '优惠买单', 'url' => RC_Uri::url('quickpay/merchant/init'), 'img' => $statics_url.'img/merchant_dashboard/quickpay.png'),
+    		array('title' => '收款二维码', 'url' => RC_Uri::url('quickpay/mh_qrcode/init'), 'img' => $statics_url.'img/merchant_dashboard/qrcode.png'),
+    		array('title' => '添加员工', 'url' => RC_Uri::url('staff/merchant/add', array('step' => 1)), 'img' => $statics_url.'img/merchant_dashboard/add_staff.png'),
+    		array('title' => '订单分成', 'url' => RC_Uri::url('commission/merchant/record'), 'img' => $statics_url.'img/merchant_dashboard/order_commission.png'),
+    		array('title' => '运费设置', 'url' => RC_Uri::url('shipping/mh_shipping/shipping_template'), 'img' => $statics_url.'img/merchant_dashboard/ship_set.png'),
+    		array('title' => '小票机设置', 'url' => RC_Uri::url('printer/mh_print/init'), 'img' => $statics_url.'img/merchant_dashboard/printer.png'),
+    		array('title' => '公众平台', 'url' => RC_Uri::url('platform/merchant/init'), 'img' => $statics_url.'img/merchant_dashboard/platform.png'),
+    		array('title' => '小程序模版', 'url' => RC_Uri::url('merchant/merchant/template'), 'img' => $statics_url.'img/merchant_dashboard/weapp.png'),
+    	);
+    	ecjia_admin::$controller->assign('list', $list);
+    	ecjia_merchant::$controller->display(
+    		RC_Package::package('app::staff')->loadTemplate('merchant/library/widget_merchant_dashboard_fastenter.lbi', true)
+    	);
     }
 
     public static function set_admin_login_logo()
@@ -200,6 +245,8 @@ RC_Hook::add_action('merchant_dashboard_right4', array('merchant_staff_hooks', '
 RC_Hook::add_filter('merchant_dashboard_right4', array('merchant_staff_hooks', 'merchant_dashboard_right_4_2'), 2);
 RC_Hook::add_action('merchant_dashboard_right4', array('merchant_staff_hooks', 'merchant_dashboard_right_4_3'), 3);
 RC_Hook::add_action('merchant_dashboard_right4', array('merchant_staff_hooks', 'merchant_dashboard_right_4_4'), 4);
+RC_Hook::add_action('merchant_dashboard_right4', array('merchant_staff_hooks', 'merchant_dashboard_right_4_5'), 5);
+RC_Hook::add_action('merchant_dashboard_right4', array('merchant_staff_hooks', 'merchant_dashboard_right_4_6'), 6);
 
 RC_Hook::add_action('ecjia_admin_logo_display', array('merchant_staff_hooks', 'set_admin_login_logo'));
 
