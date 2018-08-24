@@ -81,6 +81,7 @@ class merchant_staff_hooks
             }
         }
         $merchant_info['shop_closed'] = $shop_closed;
+        
         RC_Loader::load_app_func('merchant', 'merchant');
         $merchant_info['shop_time_value'] = get_store_trade_time($_SESSION['store_id']);
 
