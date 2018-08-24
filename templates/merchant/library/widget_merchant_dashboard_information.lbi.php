@@ -19,28 +19,28 @@
 	                	<div class="panel-type">
 	                		<div class="panel-type-item">
 	                			{if $merchant_info.manage_mode eq 'self'}
-	                			<img src="{$ecjia_main_static_url}img/shop_type/self.png" />
+	                			<img src="{$ecjia_main_static_url}img/merchant_dashboard/self.png" />
 	                			<div class="type">自营店</div>
 								{else}
-								<img src="{$ecjia_main_static_url}img/shop_type/join.png" />
+								<img src="{$ecjia_main_static_url}img/merchant_dashboard/join.png" />
 								<div class="type">入驻店</div>
 								{/if}	                			
 	                		</div>
 	               			<div class="panel-type-item">
 	                			{if $merchant_info.identity_type eq 1}
-	                			<img src="{$ecjia_main_static_url}img/shop_type/personal.png" />
+	                			<img src="{$ecjia_main_static_url}img/merchant_dashboard/personal.png" />
 	                			<div class="type">个人入驻</div>
 								{else}
-								<img src="{$ecjia_main_static_url}img/shop_type/enterprise.png" />
+								<img src="{$ecjia_main_static_url}img/merchant_dashboard/enterprise.png" />
 								<div class="type">企业入驻</div>
 								{/if}	                			
 	                		</div>
 	                		<div class="panel-type-item">
 	                			{if $merchant_info.shop_closed neq 1}
-	                			<img src="{$ecjia_main_static_url}img/shop_type/open.png" />
+	                			<img src="{$ecjia_main_static_url}img/merchant_dashboard/open.png" />
 	                			<div class="type">营业中</div>
 								{else}
-								<img src="{$ecjia_main_static_url}img/shop_type/close.png" />
+								<img src="{$ecjia_main_static_url}img/merchant_dashboard/close.png" />
 								<div class="type">打烊</div>
 								{/if}	                			
 	                		</div>
