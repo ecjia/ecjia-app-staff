@@ -52,7 +52,7 @@
 		                    <strong>小店资料</strong>
 		                </h4>
 	                	<hr style="margin-top: 10px;margin-bottom: 10px;">
-            			<div><label>营业时间：</label>{$merchant_info.shop_trade_time}</div>
+            			<div><label>营业时间：</label>{$merchant_info.shop_time_value}</div>
             			<div><label>店铺公告：</label>{$merchant_info.shop_notice}</div>
 	            	</div>
 	        	</div>
