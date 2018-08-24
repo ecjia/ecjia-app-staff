@@ -85,6 +85,7 @@ class merchant_staff_hooks
         RC_Loader::load_app_func('merchant', 'merchant');
         $merchant_info['shop_time_value'] = get_store_trade_time($_SESSION['store_id']);
 
+        $merchant_info['shop_logo'] = !empty($merchant_info['shop_logo']) ? RC_Upload::upload_url($merchant_info['shop_logo']) : '';
         ecjia_admin::$controller->assign('merchant_info', $merchant_info);
 
         ecjia_merchant::$controller->display(
