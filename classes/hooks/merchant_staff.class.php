@@ -186,7 +186,7 @@ class merchant_staff_hooks
     //快捷入口
     public static function merchant_dashboard_right_4_6()
     {
-    	$statics_url = ecjia_merchant::get_main_static_url();
+        $statics_url = ecjia_merchant::$controller->get_main_static_url();
     	$list = array(
     		array('title' => '商品列表', 'url' => RC_Uri::url('goods/merchant/init'), 'img' => $statics_url.'img/merchant_dashboard/goods_list.png'),
     		array('title' => '验单查询', 'url' => RC_Uri::url('orders/mh_validate_order/init'), 'img' => $statics_url.'img/merchant_dashboard/validate_order.png'),
