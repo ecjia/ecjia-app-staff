@@ -511,7 +511,7 @@ class merchant extends ecjia_merchant
         $count = $db_staff_user->count();
         $page  = new ecjia_merchant_page($count, 10, 5);
         $data  = $db_staff_user
-            ->selectRaw('user_ident,parent_id,user_id,name,nick_name,mobile,email,group_id,last_login')
+            ->select('user_ident', 'parent_id', 'user_id', 'name', 'nick_name', 'mobile', 'email', 'group_id', 'last_login')
             ->orderby('user_id', 'asc')
             ->take(10)
             ->skip($page->start_id - 1)

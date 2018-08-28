@@ -129,7 +129,7 @@ function signin_merchant($username, $password, $device, $api_version, $login_typ
     }
    
     /* 检查密码是否正确 */
-    $db_staff_user = RC_DB::table('staff_user')->selectRaw('user_id, mobile, name, store_id, nick_name, email, last_login, last_ip, action_list, avatar, group_id, online_status');
+    $db_staff_user = RC_DB::table('staff_user')->select('user_id', 'mobile', 'name', 'store_id', 'nick_name', 'email', 'last_login', 'last_ip', 'action_list', 'avatar', 'group_id', 'online_status');
     if (version_compare($api_version, '1.14', '>=')) {
     	if ($login_type == 'smslogin') {
     		$db_staff_user->where('mobile', $username);
