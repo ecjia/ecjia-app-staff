@@ -27,12 +27,12 @@
                     <div class="control-group formSep">
                         <label class="control-label">{t}员工数量：{/t}</label>
                         <div class="controls">
-                            <input type="text" name="shop_staff_number" value="{$shop_staff_number}" />
+                            <input type="text" name="merchant_staff_max_number" value="{$store.merchant_staff_max_number}" />
                             <span class="help-block">设置当前商家可添加员工的数量，比如设置10，则商家最多只可添加10名员工</span>
                         </div>
                     </div>
 
-                    <div class="control-group " >
+                    <div class="control-group">
                         <div class="controls">
                             <input type="submit" value="{t}确定{/t}" class="btn btn-gebo" />
                             <input type="hidden" name="store_id" value="{$store.store_id}">

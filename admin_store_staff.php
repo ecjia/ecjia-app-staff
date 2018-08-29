@@ -281,7 +281,18 @@ class admin_store_staff extends ecjia_admin
         }
         $this->assign('ur_here', $store['merchants_name'] . ' - ' . '员工设置');
         $this->assign('form_action', RC_Uri::url('staff/admin_store_staff/set_update'));
-    	
+        
+        $merchant_info = get_merchant_info($store_id);
+        //员工数量
+        $has_merchant_staff_max_number = array_key_exists('merchant_staff_max_number', $merchant_info);
+        if ($has_merchant_staff_max_number == false) {
+        	$db = RC_DB::table('merchants_config');
+        	$data = array('store_id' => $store_id, 'group' => 0, 'code' => 'merchant_staff_max_number', 'type' => '', 'store_range' => '', 'store_dir' => '', 'value' => 0, 'sort_order' => 1);
+        	$db->insert($data);
+        } else {
+        	$store['merchant_staff_max_number'] = $merchant_info['merchant_staff_max_number'];
+        }
+        
     	$this->assign('store', $store);
     	$this->display('store_staff_set.dwt');
     }
@@ -292,6 +303,9 @@ class admin_store_staff extends ecjia_admin
     	
     	$store_id = intval($_POST['store_id']);
     	
+    	$merchant_staff_max_number = !empty($_POST['merchant_staff_max_number']) ? intval($_POST['merchant_staff_max_number']) : 0;
+    	RC_DB::table('merchants_config')->where('store_id', $store_id)->where('code', 'merchant_staff_max_number')->update(array('value' => $merchant_staff_max_number));
+     	
     	return $this->showmessage('更新成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('staff/admin_store_staff/set', array('store_id' => $store_id))));
     }
 }
