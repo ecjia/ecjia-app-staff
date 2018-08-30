@@ -9,7 +9,7 @@ class StaffServiceProvider extends  AppParentServiceProvider
     
     public function boot()
     {
-        $this->package('ecjia/app-staff', null, dirname(__DIR__));
+        $this->package('ecjia/app-staff');
     }
     
     public function register()
