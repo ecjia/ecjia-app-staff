@@ -27,16 +27,16 @@
 								{/if}	                			
 	                		</div>
 	               			<div class="panel-type-item">
-	                			{if $merchant_info.identity_type eq '1'}
+	                			{if $merchant_info.identity_type eq 1}
 	                			<img src="{$ecjia_main_static_url}img/merchant_dashboard/personal.png" />
 	                			<div class="type">个人入驻</div>
-								{else}
+								{else $merchant_info.identity_type eq 2}
 								<img src="{$ecjia_main_static_url}img/merchant_dashboard/enterprise.png" />
 								<div class="type">企业入驻</div>
 								{/if}	                			
 	                		</div>
 	                		<div class="panel-type-item">
-	                			{if $merchant_info.shop_close neq 1}
+	                			{if $merchant_info.shop_close neq 1 && $merchant_info.shop_closed neq 1}
 	                			<img src="{$ecjia_main_static_url}img/merchant_dashboard/open.png" />
 	                			<div class="type">营业中</div>
 								{else}
