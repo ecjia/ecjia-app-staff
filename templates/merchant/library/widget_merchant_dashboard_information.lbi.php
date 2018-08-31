@@ -27,10 +27,10 @@
 								{/if}	                			
 	                		</div>
 	               			<div class="panel-type-item">
-	                			{if $merchant_info.identity_type eq 1}
+	                			{if $merchant_info.validate_type eq 1}
 	                			<img src="{$ecjia_main_static_url}img/merchant_dashboard/personal.png" />
 	                			<div class="type">个人入驻</div>
-								{else $merchant_info.identity_type eq 2}
+								{else $merchant_info.validate_type eq 2}
 								<img src="{$ecjia_main_static_url}img/merchant_dashboard/enterprise.png" />
 								<div class="type">企业入驻</div>
 								{/if}	                			
