@@ -50,7 +50,7 @@ defined('IN_ECJIA') or exit('No permission resources.');
  * 管理员修改密码
  * @author will
  */
-class password_module extends api_admin implements api_interface {
+class admin_user_password_module extends api_admin implements api_interface {
     public function handleRequest(\Royalcms\Component\HttpKernel\Request $request) {
     	
 		$new_password = $this->requestData('password');
