@@ -201,15 +201,15 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
             
             $_SESSION['device_id'] = $device_id;
            
-            if (empty($row['salt'])) {
-                $salt = rand(1, 9999);
-                $new_possword = md5(md5($password) . $salt);
-                $data = array(
-                    'salt'  => $salt,
-                    'password'  => $new_possword
-                );
-                RC_DB::table('staff_user')->where('user_id', $_SESSION['staff_id'])->update($data);
-            }
+//             if (empty($row['salt'])) {
+//                 $salt = rand(1, 9999);
+//                 $new_possword = md5(md5($password) . $salt);
+//                 $data = array(
+//                     'salt'  => $salt,
+//                     'password'  => $new_possword
+//                 );
+//                 RC_DB::table('staff_user')->where('user_id', $_SESSION['staff_id'])->update($data);
+//             }
         
             if ($row['action_list'] == 'all' && empty($row['last_login'])) {
                 $_SESSION['shop_guide'] = true;
@@ -367,15 +367,15 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
                 $_SESSION['admin_name'] = $row['username'];
             }
                 
-            if (empty($row['ec_salt'])) {
-                $ec_salt = rand(1, 9999);
-                $new_possword = md5(md5($password) . $ec_salt);
-                $data = array(
-                    'ec_salt'   => $ec_salt,
-                    'password'  => $new_possword
-                );
-                $db_user->where(array('user_id' => $_SESSION['admin_id']))->update($data);
-            }
+//             if (empty($row['ec_salt'])) {
+//                 $ec_salt = rand(1, 9999);
+//                 $new_possword = md5(md5($password) . $ec_salt);
+//                 $data = array(
+//                     'ec_salt'   => $ec_salt,
+//                     'password'  => $new_possword
+//                 );
+//                 $db_user->where(array('user_id' => $_SESSION['admin_id']))->update($data);
+//             }
         
             if ($row['action_list'] == 'all' && empty($row['last_login'])) {
                 $_SESSION['shop_guide'] = true;
