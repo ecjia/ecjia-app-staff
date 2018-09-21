@@ -280,19 +280,21 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
             $result = ecjia_app::validate_application('mobile');
             if (!is_ecjia_error($result)) {
                 if (!empty($device['udid']) && !empty($device['client']) && !empty($device['code'])) {
-                    $db_mobile_device = RC_Model::model('mobile/mobile_device_model');
+                    //$db_mobile_device = RC_Model::model('mobile/mobile_device_model');
                     $device_data = array(
                             'device_udid'   => $device['udid'],
                             'device_client' => $device['client'],
                             'device_code'   => $device['code'],
                             'user_type'     => 'merchant',
                     );
-                    $device_info = $db_mobile_device->find($device_data);
+                    //$device_info = $db_mobile_device->find($device_data);
+                    $device_info = RC_DB::table('mobile_device')->where('device_udid', $device['udid'])->where('device_client', $device['client'])->where('device_code', $device['code'])->where('user_type', 'merchant')->first();
+                    $time = RC_Time::gmtime();
                     if (empty($device_info)) {
-                        $device_data['add_time'] = RC_Time::gmtime();
-                        $db_mobile_device->insert($device_data);
+                        $device_data['add_time'] = $time;
+                        RC_DB::table('mobile_device')->insert($device_data);
                     } else {
-                        $db_mobile_device->where($device_data)->update(array('user_id' => $_SESSION['staff_id'], 'update_time' => RC_Time::gmtime()));
+                        RC_DB::table('mobile_device')->where('device_udid', $device['udid'])->where('device_client', $device['client'])->where('device_code', $device['code'])->where('user_type', 'merchant')->update(array('user_id' => $_SESSION['staff_id'], 'update_time' => $time));
                     }
                 }
             }
@@ -358,8 +360,13 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
             $_SESSION['last_ip']        = $row['last_ip'];
                 
             /* 获取device_id*/
-            $device_id = RC_Model::model('mobile/mobile_device_model')->where(array('device_udid' => $device['udid'], 'device_client' => $device['client'], 'device_code' => $device['code']))->get_field('id');
-            $_SESSION['device_id']      = $row['device_id'];
+            //$device_id = RC_Model::model('mobile/mobile_device_model')->where(array('device_udid' => $device['udid'], 'device_client' => $device['client'], 'device_code' => $device['code']))->get_field('id');
+            $device_id = RC_DB::table('mobile_device')
+				            ->where('device_udid', $device['udid'])
+				            ->where('device_client', $device['client'])
+				            ->where('device_code', $device['code'])
+				            ->pluck('id');
+            $_SESSION['device_id']      = $device_id;
         
             //TODO
             if ($device['code'] == '8001') {
@@ -416,19 +423,20 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
             $result = ecjia_app::validate_application('mobile');
             if (!is_ecjia_error($result)) {
                 if (!empty($device['udid']) && !empty($device['client']) && !empty($device['code'])) {
-                    $db_mobile_device = RC_Model::model('mobile/mobile_device_model');
+                    //$db_mobile_device = RC_Model::model('mobile/mobile_device_model');
                     $device_data = array(
                         'device_udid'   => $device['udid'],
                         'device_client' => $device['client'],
                         'device_code'   => $device['code'],
                         'user_type'     => 'admin',
                     );
-                    $device_info = $db_mobile_device->find($device_data);
+                    $device_info = RC_DB::table('mobile_device')->where('device_udid', $device['udid'])->where('device_client', $device['client'])->where('device_code', $device['code'])->where('user_type', 'admin')->first();
+                    $time = RC_Time::gmtime();
                     if (empty($device_info)) {
-                        $device_data['add_time'] = RC_Time::gmtime();
-                        $db_mobile_device->insert($device_data);
+                        $device_data['add_time'] = $time;
+                        RC_DB::table('mobile_device')->insert($device_data);
                     } else {
-                        $db_mobile_device->where($device_data)->update(array('user_id' => $_SESSION['admin_id'], 'update_time' => RC_Time::gmtime()));
+                        RC_DB::table('mobile_device')->where('device_udid', $device['udid'])->where('device_client', $device['client'])->where('device_code', $device['code'])->where('user_type', 'admin')->update(array('user_id' => $_SESSION['admin_id'], 'update_time' => $time));
                     }
                 }
             }
