@@ -104,10 +104,11 @@ class v2_admin_user_userinfo_module extends api_admin implements api_interface {
     }
 
     private function get_user_info_admin() {
-        $db = RC_Model::model('user/admin_user_model');
+        //$db = RC_Model::model('user/admin_user_model');
         $db_role = RC_Loader::load_model('role_model');
         
-        $result = $db->find(array('user_id' => $_SESSION['admin_id']));
+        //$result = $db->find(array('user_id' => $_SESSION['admin_id']));
+        $result = RC_DB::table('admin_user')->where('user_id', $_SESSION['admin_id'])->first();
         
         if (isset($_SESSION['adviser_id']) && !empty($_SESSION['adviser_id'])) {
             $adviser_info = RC_Model::model('achievement/adviser_model')->find(array('id' => $_SESSION['adviser_id']));

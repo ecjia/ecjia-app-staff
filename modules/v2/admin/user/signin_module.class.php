@@ -307,10 +307,11 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
 
 
     private function signin_admin($username, $password, $device) {
-        $db_user = RC_Model::model('user/admin_user_model');
+        //$db_user = RC_Model::model('user/admin_user_model');
         //到家后台不允许平台管理员登录
         if (!empty($device) && is_array($device) && ($device['code'] == '6001' || $device['code'] == '6002')) {
-            if ($db_user->where(array('user_name' => $username))->count()) {
+        	$count = RC_DB::table('admin_user')->where('user_name', $username)->count();
+            if ($count) {
                 return new ecjia_error('login_error', __('平台管理员请登录掌柜管理'));
             } else {
                 return new ecjia_error('login_error', __('您输入的帐号信息不正确'));
@@ -321,24 +322,28 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
         /* 收银台请求判断处理*/
         $codes = array('8001', '8011');
         if (!empty($device) && is_array($device) && in_array($device['code'], $codes)) {
-            $adviser_info = RC_Model::model('achievement/adviser_model')->find(array('username' => $username));
-            if (empty($adviser_info)) {
-                $result = new ecjia_error('login_error', __('您输入的帐号信息不正确'));
-                return $result;
-            }
-            $admin_info = $db_user->field(array('user_name', 'ec_salt'))->find(array('user_id' => $adviser_info['admin_id']));
-            $username   = $admin_info['user_name'];
-            $ec_salt    = $admin_info['ec_salt'];
+            //$adviser_info = RC_Model::model('achievement/adviser_model')->find(array('username' => $username));
+            // if (empty($adviser_info)) {
+            //     $result = new ecjia_error('login_error', __('您输入的帐号信息不正确'));
+            //     return $result;
+            //}
+            //$admin_info = $db_user->field(array('user_name', 'ec_salt'))->find(array('user_id' => $adviser_info['admin_id']));
+            //$admin_info	= RC_DB::table('admin_user')->where('user_id', $adviser_info['admin_id'])->select('user_name', 'ec_salt')->first();
+            //$username   = $admin_info['user_name'];
+            //$ec_salt    = $admin_info['ec_salt'];
         } else {
-            $ec_salt    = $db_user->where(array('user_name' => $username))->get_field('ec_salt');
+            //$ec_salt    = $db_user->where(array('user_name' => $username))->get_field('ec_salt');
+        	$ec_salt	= RC_DB::table('admin_user')->where('user_name', $username)->pluck('ec_salt');
         }
         
         
         /* 检查密码是否正确 */
         if (!empty($ec_salt)) {
-            $row = $db_user->find(array('user_name' => $username, 'password' => md5(md5($password).$ec_salt)));
+            //$row = $db_user->find(array('user_name' => $username, 'password' => md5(md5($password).$ec_salt)));
+        	$row = RC_DB::table('admin_user')->where('user_name', $username)->where('password', md5(md5($password).$ec_salt))->first();
         } else {
-            $row = $db_user->find(array('user_name' => $username, 'password' => md5($password)));
+            //$row = $db_user->find(array('user_name' => $username, 'password' => md5($password)));
+        	$row = RC_DB::table('admin_user')->where('user_name', $username)->where('password', md5($password))->first();
         }
         
         if ($row) {
@@ -392,8 +397,9 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
                 'last_login'    => RC_Time::gmtime(),
                 'last_ip'       => RC_Ip::client_ip(),
             );
-            $db_user->where(array('user_id' => $_SESSION['admin_id']))->update($data);
-        
+            //$db_user->where(array('user_id' => $_SESSION['admin_id']))->update($data);
+        	RC_DB::table('admin_user')->where('user_id', $_SESSION['admin_id'])->update($data);
+            
             $out = array(
                 'session' => array(
                     'sid' => RC_Session::session_id(),
