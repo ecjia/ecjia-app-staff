@@ -120,12 +120,12 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
                 $result = new ecjia_error('login_error', __('您输入的帐号信息不正确'));
                 return $result;
             }
-            //$device_udid = trim($device['udid']);
+            $device_udid = trim($device['udid']);
             //当前登录的收银设备是否是当前店铺的
-            //$cashier_device_info = RC_DB::table('cashier_device')->where('store_id', $staff_user_info['store_id'])->where('device_sn', $device_udid)->first();
-            //if (empty($cashier_device_info)) {
-            //	return new ecjia_error('cashier_device_error', __('此设备不属于当前店铺设备，请使用当前店铺设备登录！'));
-            //}
+            $cashier_device_info = RC_DB::table('cashier_device')->where('store_id', $staff_user_info['store_id'])->where('device_sn', $device_udid)->first();
+            if (empty($cashier_device_info)) {
+            	return new ecjia_error('cashier_device_error', __('此设备不属于当前店铺设备，请使用当前店铺设备登录！'));
+            }
             $username   = $staff_user_info['mobile'];
             $salt       = $staff_user_info['salt'];
         } else {
