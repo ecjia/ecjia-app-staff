@@ -57,17 +57,11 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
 		$username	= $this->requestData('username');
 		$password	= $this->requestData('password');
 		$device		= $this->device;
-		$sn			= $this->requestData('device_sn');
 		
 		$api_version = $this->request->header('api-version');
 		$login_type = $this->requestData('type', 'password');
 		$login_type_array = array('smslogin', 'password');
 		//$device = array('code'=> '8001', 'udid' => '4adbe6e37384dc8f085c908f5ae2c093f5bb694f', 'client' => 'android');
-		
-		RC_Logger::getLogger('error')->info('testaaa');
-		RC_Logger::getLogger('error')->info($sn);
-		RC_Logger::getLogger('error')->info('test1bbb');
-		
 		
 		if (empty($username) || empty($password)) {
 			$result = new ecjia_error('login_error', __('您输入的帐号信息不正确'));
@@ -127,14 +121,7 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
                 $result = new ecjia_error('login_error', __('您输入的帐号信息不正确'));
                 return $result;
             }
-            $device_sn = trim($device['sn']);
-            
-            RC_Logger::getLogger('error')->info('test111');
-            RC_Logger::getLogger('error')->info($device);
-            RC_Logger::getLogger('error')->info($device_sn);
-            RC_Logger::getLogger('error')->info('test222');
-           
-            
+            $device_sn = trim($device['sn']); 
             //当前登录的收银设备是否是当前店铺的
             $cashier_device_info = RC_DB::table('cashier_device')->where('store_id', $staff_user_info['store_id'])->where('device_sn', $device_sn)->first();
             if (empty($cashier_device_info)) {
