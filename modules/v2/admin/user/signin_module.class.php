@@ -120,7 +120,14 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
                 $result = new ecjia_error('login_error', __('您输入的帐号信息不正确'));
                 return $result;
             }
-            $device_sn = trim($device['device_sn']);
+            $device_sn = trim($device['sn']);
+            
+            RC_Logger::getLogger('error')->info('test111');
+            RC_Logger::getLogger('error')->info($device);
+            RC_Logger::getLogger('error')->info($device_sn);
+            RC_Logger::getLogger('error')->info('test222');
+           
+            
             //当前登录的收银设备是否是当前店铺的
             $cashier_device_info = RC_DB::table('cashier_device')->where('store_id', $staff_user_info['store_id'])->where('device_sn', $device_sn)->first();
             if (empty($cashier_device_info)) {
