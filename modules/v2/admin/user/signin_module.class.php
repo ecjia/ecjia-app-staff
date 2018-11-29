@@ -307,8 +307,9 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
             	);
             	RC_DB::table('connect_user')->where('connect_code', 'app')->where('user_id', $_SESSION['staff_id'])->where('user_type', $user_type)->update($connect_data);
             }
-            $out['userinfo']['open_id'] = $open_id;
-            $out['userinfo']['access_token'] = $access_token;
+            $out['userinfo']['open_id'] 		= $open_id;
+            $out['userinfo']['access_token'] 	= $access_token;
+            $out['userinfo']['user_type']		= 'merchant';
                     
             //修正关联设备号
             $result = ecjia_app::validate_application('mobile');
