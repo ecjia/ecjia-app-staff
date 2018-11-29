@@ -61,7 +61,7 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
 		$api_version = $this->request->header('api-version');
 		$login_type = $this->requestData('type', 'password');
 		$login_type_array = array('smslogin', 'password');
-		//$device = array('code'=> '8001', 'udid' => '4adbe6e37384dc8f085c908f5ae2c093f5bb694f', 'client' => 'android');
+		//$device = array('code'=> '8001', 'udid' => '4adbe6e37384dc8f085c908f5ae2c093f5bb694f', 'client' => 'android', 'sn' => '00130136');
 		
 		if (empty($username) || empty($password)) {
 			$result = new ecjia_error('login_error', __('您输入的帐号信息不正确'));
