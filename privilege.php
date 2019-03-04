@@ -203,10 +203,10 @@ class privilege extends ecjia_merchant {
 								$this->assign('error_message', '获取店长信息失败。');
 							}
 						} else {
-							$this->assign('error_message', '请使用正确的管理员账号从平台后台登录。');
+							$this->assign('error_message', '抱歉！只允许超级管理员进行登录。');
 						}
 					} else {
-						$this->assign('error_message', '抱歉！只允许超级管理员进行登录。');
+						$this->assign('error_message', '请使用正确的管理员账号从平台后台登录。');
 					}
 				} else {
 					$this->assign('error_message', '抱歉！请求超时。');
