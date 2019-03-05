@@ -65,6 +65,7 @@ class staff_store_remove_cleardata_api extends Component_Event_Api
 
         return [
             new \Ecjia\App\Staff\StoreCleanHandlers\StoreStaffClear($store_id),
+            new \Ecjia\App\Staff\StoreCleanHandlers\StoreStaffLogClear($store_id),
         ];
     }
 
