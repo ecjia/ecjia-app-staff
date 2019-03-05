@@ -33,7 +33,7 @@ class StoreStaffClear extends StoreCleanAbstract
      * 排序
      * @var int
      */
-    protected $sort = 88;
+    protected $sort = 18;
 
     /**
      * 数据描述及输出显示内容

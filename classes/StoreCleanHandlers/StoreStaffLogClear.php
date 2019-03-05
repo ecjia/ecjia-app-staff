@@ -33,7 +33,7 @@ class StoreStaffLogClear extends StoreCleanAbstract
      * 排序
      * @var int
      */
-    protected $sort = 112;
+    protected $sort = 33;
 
     /**
      * 数据描述及输出显示内容
