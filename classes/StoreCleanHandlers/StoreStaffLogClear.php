@@ -40,12 +40,11 @@ class StoreStaffLogClear extends StoreCleanAbstract
      */
     public function handlePrintData()
     {
+        $text = __('店铺所有日志全部删除', 'staff');
+
         return <<<HTML
-
-<span class="controls-info w300">店铺所有日志全部删除</span>
-
+<span class="controls-info w300">{$text}</span>
 HTML;
-
     }
 
     /**

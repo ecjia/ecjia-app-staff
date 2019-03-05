@@ -40,18 +40,16 @@ class StoreStaffClear extends StoreCleanAbstract
      */
     public function handlePrintData()
     {
-        $count = $this->handleCount();
-
         $url = RC_Uri::url('staff/admin_store_staff/init', array('store_id' => $this->store_id));
 
+        $count     = $this->handleCount();
+        $text      = sprintf(__('店铺员工总共<span class="ecjiafc-red ecjiaf-fs3">%s</span>个', 'staff'), $count);
+        $text_info = __('查看全部>>>', 'staff');
+
         return <<<HTML
-
-<span class="controls-info w300">店铺员工总共<span class="ecjiafc-red ecjiaf-fs3">{$count}</span>个</span>
-
-<span class="controls-info"><a href="{$url}" target="__blank">查看全部>>></a></span>
-
+<span class="controls-info w300">{$text}</span>
+<span class="controls-info"><a href="{$url}" target="__blank">{$text_info}</a></span>
 HTML;
-
     }
 
     /**
