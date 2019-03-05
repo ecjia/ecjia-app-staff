@@ -159,12 +159,17 @@ class privilege extends ecjia_merchant {
 	/**
 	 * 退出
 	 */
-	public function logout() {
+	public function logout()
+    {
+
+        RC_Hook::do_action('ecjia_merchant_logout_before');
+
 		/* 清除cookie */
 		RC_Cookie::delete('ECJAP.staff_id');
 		RC_Cookie::delete('ECJAP.staff_pass');
 		
 		RC_Session::destroy();
+
 		return $this->redirect(RC_Uri::url('staff/privilege/login'));
 	}
 	
