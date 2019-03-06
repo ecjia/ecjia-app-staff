@@ -13,11 +13,11 @@
 	            {/if}
 	           	<p>{if $user_info.introduction eq ''}主人你好懒，赶紧去个人中心完善资料吧~~{else}{$user_info.introduction}{/if}</p>
 	            <div class="pull-left">
-	                 <label class="">{t}上次登录IP：{/t}</label>
+	                 <label class="">{t domain="staff"}上次登录IP：{/t}</label>
 	                 {$user_info.last_ip}
 	            </div>
 	            <div class="pull-left">
-	                 <label class="">{t}上次登录时间：{/t}</label>
+	                 <label class="">{t domain="staff"}上次登录时间：{/t}</label>
 	                 {$user_info.last_login}
 	            </div>
 	            
