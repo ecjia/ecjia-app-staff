@@ -56,17 +56,17 @@
                             
                             <div class="form-group controls">
                                 <label>{t domain="staff"}当前密码{/t}</label>
-                                <input type="password" id="old_password"  name="old_password"  class="form-control"  placeholder="请先填写旧密码" />
+                                <input type="password" id="old_password"  name="old_password"  class="form-control"  placeholder='{t domain="staff"}请先填写旧密码{/t}' />
                             </div>
                             
                             <div class="form-group controls">
                                 <label>{t domain="staff"}新密码{/t}</label>
-                                <input type="password" id="new_password"  name="new_password" class="form-control"  placeholder="请输入新密码" />
+                                <input type="password" id="new_password"  name="new_password" class="form-control"  placeholder='{t domain="staff"}请输入新密码{/t}' />
                             </div>
                             
                             <div class="form-group controls">
                                 <label>{t domain="staff"}确认密码{/t}</label>
-                                <input type="password" id="pwd_confirm"  name="pwd_confirm" class="form-control"  placeholder="确认密码和新密码需保持一致" />
+                                <input type="password" id="pwd_confirm"  name="pwd_confirm" class="form-control"  placeholder='{t domain="staff"}确认密码和新密码需保持一致{/t}' />
                             </div>
                             
                             <div class="form-group">
@@ -97,7 +97,7 @@
 			                       <div class="input-group">
 					                   <input type="text" class="form-control" name="mobilecode" placeholder='{t domain="staff"}请输入短信验证码{/t}'>
 					                   <span class="input-group-btn">
-					                       <input class="btn btn-info" id="get_mobile_code" data-url='{RC_Uri::url("staff/mh_profile/get_mobile_code")}' type="button" value="获取短信校验码">
+					                       <input class="btn btn-info" id="get_mobile_code" data-url='{RC_Uri::url("staff/mh_profile/get_mobile_code")}' type="button" value='{t domain="staff"}获取短信校验码{/t}'>
 					                   </span>
 					               </div>
 					               <br>  
@@ -134,7 +134,7 @@
 			                       <div class="input-group">
 					                   <input type="text" class="form-control" name="emailcode"  placeholder='{t domain="staff"}请输入邮箱验证码{/t}'>
 					                   <span class="input-group-btn">
-					                       <input class="btn btn-info" id="get_email_code" data-url='{RC_Uri::url("staff/mh_profile/get_email_code")}' type="button" value="获取邮箱验证码">
+					                       <input class="btn btn-info" id="get_email_code" data-url='{RC_Uri::url("staff/mh_profile/get_email_code")}' type="button" value='{t domain="staff"}获取邮箱验证码{/t}'>
 					                   </span>
 					               </div>
 					               <br>  

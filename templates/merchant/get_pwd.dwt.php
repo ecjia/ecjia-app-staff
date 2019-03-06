@@ -37,8 +37,8 @@
        		<div class="store_logo">{$logo_display}</div>
             <h2 class="form-login-heading">{t domain="staff"}管理员密码找回{/t}</h2>
             <div class="login-wrap">
-                <input class="form-control"  type="password"  id="password"      name="password"     placeholder="新密码"   value="" autocomplete="off" />
-                <input class="form-control"  type="password"  id="confirm_pwd"   name="confirm_pwd"  placeholder="确认密码" value="" autocomplete="off" />
+                <input class="form-control"  type="password"  id="password"      name="password"     placeholder='{t domain="staff"}新密码{/t}'   value="" autocomplete="off" />
+                <input class="form-control"  type="password"  id="confirm_pwd"   name="confirm_pwd"  placeholder='{t domain="staff"}确认密码{/t}' value="" autocomplete="off" />
                 <input type="hidden" name="adminid" value="{$adminid}" />
 				<input type="hidden" name="code" value="{$code}" />
                 <button class="btn btn-lg btn-block btn-primary" type="submit">{t domain="staff"}确定{/t}</button>

@@ -43,7 +43,7 @@
 	                	<hr style="margin-top: 10px;margin-bottom: 10px;">
 	                	<p>{if $Manager.introduction}{$Manager.introduction}{else}{t domain="staff"}店长有点懒哦，赶紧去个人中心完善资料吧~~{/t}{/if}</p>
 	                	{if $parent_id eq 0}
-	                	<p><a class="data-pjax" href='{RC_Uri::url("staff/mh_log/init", "user_id={$Manager.user_id}")}'>{t domain="staff"}查看日志{/t}</a> | <a class="data-pjax" href='{RC_Uri::url("staff/merchant/edit", "user_id={$Manager.user_id}&parent_id=0")}'>编辑</a></p>
+	                	<p><a class="data-pjax" href='{RC_Uri::url("staff/mh_log/init", "user_id={$Manager.user_id}")}'>{t domain="staff"}查看日志{/t}</a> | <a class="data-pjax" href='{RC_Uri::url("staff/merchant/edit", "user_id={$Manager.user_id}&parent_id=0")}'>{t domain="staff"}编辑{/t}</a></p>
 	                	{/if}
 	            	</div>
 	            	

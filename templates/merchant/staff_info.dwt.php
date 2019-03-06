@@ -65,7 +65,7 @@
                           <div class="col-lg-6">
                               <input class="form-control" name="mobile" id="mobile" placeholder='{t domain="staff"}请输入手机号{/t}' type="text"/>
                           </div>
-                         <input class="btn btn-primary" data-url="{url path='staff/merchant/get_code_value'}" id="get_code" type="button" value="获取短信验证码">
+                         <input class="btn btn-primary" data-url="{url path='staff/merchant/get_code_value'}" id="get_code" type="button" value='{t domain="staff"}获取短信验证码{/t}'>
                       </div>
 
                       <div class="form-group">
@@ -162,7 +162,7 @@
                     
                     <div class="form-group ">
                         <div class="col-lg-6 col-md-offset-2">
-                           <input class="btn btn-primary" type="submit" value="提交">
+                           <input class="btn btn-primary" type="submit" value='{t domain="staff"}提交{/t}'>
                         </div>
                     </div>
                 </form>

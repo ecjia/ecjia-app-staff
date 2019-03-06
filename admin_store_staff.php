@@ -149,7 +149,7 @@ class admin_store_staff extends ecjia_admin
         if (empty($store)) {
             return $this->showmessage(__('店铺信息不存在！', 'staff'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
-        $this->assign('action_link', array('href' => RC_Uri::url('staff/admin_store_staff/init', array('store_id' => $store_id)), 'text' => '查看员工'));
+        $this->assign('action_link', array('href' => RC_Uri::url('staff/admin_store_staff/init', array('store_id' => $store_id)), 'text' => __('查看员工', 'staff')));
         $this->assign('ur_here', $store['merchants_name'] . __(' - 编辑店长', 'staff'));
         $this->assign('store', $store);
 
