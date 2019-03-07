@@ -57,7 +57,7 @@ class mh_log extends ecjia_merchant {
 		RC_Script::enqueue_script('jquery-validate');
 		RC_Script::enqueue_script('jquery-form');
 
-		RC_Script::enqueue_script('staff_logs', RC_App::apps_url('statics/js/staff_logs.js', __FILE__), array(), false, true);
+		RC_Script::enqueue_script('staff_logs', RC_App::apps_url('statics/js/staff_logs.js', __FILE__), array(), false, 1);
         RC_Script::localize_script('staff_logs', 'js_lang', config('app-staff::jslang.staff_page'));
 
 		ecjia_merchant_screen::get_current_screen()->set_parentage('staff', 'staff/merchant.php');

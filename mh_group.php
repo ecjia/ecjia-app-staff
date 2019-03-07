@@ -65,10 +65,10 @@ class mh_group extends ecjia_merchant
         RC_Style::enqueue_style('staff', RC_App::apps_url('statics/css/staff.css', __FILE__), array());
         RC_Style::enqueue_style('bar', RC_App::apps_url('statics/css/bar.css', __FILE__), array());
 
-        RC_Script::enqueue_script('staff_group', RC_App::apps_url('statics/js/staff_group.js', __FILE__));
-        RC_Script::enqueue_script('migrate', RC_App::apps_url('statics/js/migrate.js', __FILE__), array(), false, true);
-        RC_Script::enqueue_script('staff', RC_App::apps_url('statics/js/staff.js', __FILE__));
-        RC_Script::enqueue_script('staff_logs', RC_App::apps_url('statics/js/staff_logs.js', __FILE__), array(), false, true);
+        RC_Script::enqueue_script('staff_group', RC_App::apps_url('statics/js/staff_group.js', __FILE__), array(), false, 1);
+        RC_Script::enqueue_script('migrate', RC_App::apps_url('statics/js/migrate.js', __FILE__), array(), false, 1);
+        RC_Script::enqueue_script('staff', RC_App::apps_url('statics/js/staff.js', __FILE__), array(), false, 1);
+        RC_Script::enqueue_script('staff_logs', RC_App::apps_url('statics/js/staff_logs.js', __FILE__), array(), false, 1);
         RC_Script::localize_script('staff_group', 'js_lang', config('app-staff::jslang.staff_page'));
         RC_Script::localize_script('staff', 'js_lang', config('app-staff::jslang.staff_page'));
         RC_Script::localize_script('staff_logs', 'js_lang', config('app-staff::jslang.staff_page'));

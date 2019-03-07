@@ -63,12 +63,12 @@ class mh_profile extends ecjia_merchant
 
         RC_Script::enqueue_script('bootstrap-fileupload-script', dirname(RC_App::app_dir_url(__FILE__)) . '/merchant/statics/assets/bootstrap-fileupload/bootstrap-fileupload.js', array());
         RC_Style::enqueue_style('bootstrap-fileupload', dirname(RC_App::app_dir_url(__FILE__)) . '/merchant/statics/assets/bootstrap-fileupload/bootstrap-fileupload.css', array(), false, false);
-        RC_Script::enqueue_script('migrate', RC_App::apps_url('statics/js/migrate.js', __FILE__), array(), false, true);
+        RC_Script::enqueue_script('migrate', RC_App::apps_url('statics/js/migrate.js', __FILE__), array(), false, 1);
 
-        RC_Script::enqueue_script('profile', RC_App::apps_url('statics/js/profile.js', __FILE__));
+        RC_Script::enqueue_script('profile', RC_App::apps_url('statics/js/profile.js', __FILE__), array(), false, 1);
 
         RC_Style::enqueue_style('style', RC_App::apps_url('statics/css/style.css', __FILE__), array());
-        RC_Script::enqueue_script('cropbox', RC_App::apps_url('statics/js/cropbox.js', __FILE__));
+        RC_Script::enqueue_script('cropbox', RC_App::apps_url('statics/js/cropbox.js', __FILE__), array(), false, 1);
 
         RC_Script::localize_script('profile', 'js_lang', config('app-staff::jslang.staff_page'));
     }
