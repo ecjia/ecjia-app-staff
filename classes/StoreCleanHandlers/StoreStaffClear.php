@@ -13,6 +13,8 @@ use RC_Uri;
 use RC_DB;
 use RC_Api;
 use ecjia_admin;
+use RC_Filesystem;
+use RC_Upload;
 
 class StoreStaffClear extends StoreCleanAbstract
 {
@@ -75,6 +77,14 @@ HTML;
         $count = $this->handleCount();
         if (empty($count)) {
             return true;
+        }
+
+        $file_list = RC_DB::table('staff_user')->where('store_id', $this->store_id)->lists('avatar');
+        if (!empty($file_list)) {
+            $disk = RC_Filesystem::disk();
+            foreach ($file_list as $k => $v) {
+                $disk->delete(RC_Upload::upload_path() . $v);
+            }
         }
 
         $result = RC_DB::table('staff_user')->where('store_id', $this->store_id)->delete();
