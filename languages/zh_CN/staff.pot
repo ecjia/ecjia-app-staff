@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ecjia App staff 1.27.4\n"
 "Report-Msgid-Bugs-To: https://make.ecjia.com/polyglots/\n"
-"POT-Creation-Date: 2019-03-13 05:24:30+00:00\n"
+"POT-Creation-Date: 2019-03-20 07:33:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -146,25 +146,33 @@ msgstr ""
 msgid "员工组"
 msgstr ""
 
-#: classes/StoreCleanHandlers/StoreStaffClear.php:48
-msgid "店铺员工总共<span class=\"ecjiafc-red ecjiaf-fs3\">%s</span>个"
+#: classes/StoreCleanHandlers/StoreStaffClear.php:36
+msgid "店铺员工"
 msgstr ""
 
 #: classes/StoreCleanHandlers/StoreStaffClear.php:49
+msgid "店铺员工总共<span class=\"ecjiafc-red ecjiaf-fs3\">%s</span>个"
+msgstr ""
+
+#: classes/StoreCleanHandlers/StoreStaffClear.php:50
 msgid "查看全部>>>"
 msgstr ""
 
-#: classes/StoreCleanHandlers/StoreStaffClear.php:110
-#: classes/StoreCleanHandlers/StoreStaffLogClear.php:95
+#: classes/StoreCleanHandlers/StoreStaffClear.php:111
+#: classes/StoreCleanHandlers/StoreStaffLogClear.php:96
 msgid "店铺名是%s"
 msgstr ""
 
-#: classes/StoreCleanHandlers/StoreStaffClear.php:110
-#: classes/StoreCleanHandlers/StoreStaffLogClear.php:95
+#: classes/StoreCleanHandlers/StoreStaffClear.php:111
+#: classes/StoreCleanHandlers/StoreStaffLogClear.php:96
 msgid "店铺ID是%s"
 msgstr ""
 
-#: classes/StoreCleanHandlers/StoreStaffLogClear.php:43
+#: classes/StoreCleanHandlers/StoreStaffLogClear.php:34
+msgid "店铺操作日志"
+msgstr ""
+
+#: classes/StoreCleanHandlers/StoreStaffLogClear.php:44
 msgid "店铺所有日志全部删除"
 msgstr ""
 
