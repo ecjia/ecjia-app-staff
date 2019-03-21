@@ -186,10 +186,6 @@ class admin_store_staff extends ecjia_admin
         if (empty($mobile)) {
             return $this->showmessage(__('联系手机不能为空', 'staff'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
-//         $chars = "/^1(3|4|5|6|7|8|9)\d{9}$/";
-//         if (!preg_match($chars, $mobile)) {
-//             return $this->showmessage(__('手机号码格式错误', 'staff'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
-//         }
         $check_mobile = Ecjia\App\Sms\Helper::check_mobile($mobile);
         if (is_ecjia_error($check_mobile)) {
             return $this->showmessage($check_mobile->get_error_message(), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
