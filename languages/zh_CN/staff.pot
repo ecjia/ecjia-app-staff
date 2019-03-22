@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ecjia App staff 1.27.4\n"
 "Report-Msgid-Bugs-To: https://make.ecjia.com/polyglots/\n"
-"POT-Creation-Date: 2019-03-20 07:33:55+00:00\n"
+"POT-Creation-Date: 2019-03-22 03:53:32+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,11 +25,11 @@ msgstr ""
 msgid "查看员工"
 msgstr ""
 
-#: admin_store_staff.php:121 admin_store_staff.php:279
+#: admin_store_staff.php:121 admin_store_staff.php:275
 msgid "自营店铺列表"
 msgstr ""
 
-#: admin_store_staff.php:123 admin_store_staff.php:281
+#: admin_store_staff.php:123 admin_store_staff.php:277
 msgid "入驻商家列表"
 msgstr ""
 
@@ -53,31 +53,31 @@ msgstr ""
 msgid "联系手机不能为空"
 msgstr ""
 
-#: admin_store_staff.php:198
+#: admin_store_staff.php:194
 msgid "邮箱不能为空"
 msgstr ""
 
-#: admin_store_staff.php:203
+#: admin_store_staff.php:199
 msgid "联系手机员工中已存在，请修改"
 msgstr ""
 
-#: admin_store_staff.php:207
+#: admin_store_staff.php:203
 msgid "邮箱员工中已存在，请修改"
 msgstr ""
 
-#: admin_store_staff.php:221 admin_store_staff.php:310
+#: admin_store_staff.php:217 admin_store_staff.php:306
 msgid "更新成功"
 msgstr ""
 
-#: admin_store_staff.php:257
+#: admin_store_staff.php:253
 msgid "重置成功"
 msgstr ""
 
-#: admin_store_staff.php:259
+#: admin_store_staff.php:255
 msgid "重置失败"
 msgstr ""
 
-#: admin_store_staff.php:272 admin_store_staff.php:283
+#: admin_store_staff.php:268 admin_store_staff.php:279
 #: apis/staff_store_menu_api.class.php:59
 msgid "员工设置"
 msgstr ""
@@ -615,22 +615,22 @@ msgstr ""
 msgid "邮箱格式不正确！"
 msgstr ""
 
-#: modules/v2/admin/user/forget_request_module.class.php:108
-#: modules/v2/admin/user/forget_request_module.class.php:172
+#: modules/v2/admin/user/forget_request_module.class.php:105
+#: modules/v2/admin/user/forget_request_module.class.php:169
 msgid "账户变更效验码"
 msgstr ""
 
-#: modules/v2/admin/user/forget_request_module.class.php:118
-#: modules/v2/admin/user/forget_request_module.class.php:182
+#: modules/v2/admin/user/forget_request_module.class.php:115
+#: modules/v2/admin/user/forget_request_module.class.php:179
 msgid "邮件发送失败！"
 msgstr ""
 
-#: modules/v2/admin/user/forget_request_module.class.php:122
-#: modules/v2/admin/user/forget_request_module.class.php:156
+#: modules/v2/admin/user/forget_request_module.class.php:119
+#: modules/v2/admin/user/forget_request_module.class.php:153
 msgid "用户不存在！"
 msgstr ""
 
-#: modules/v2/admin/user/forget_request_module.class.php:186
+#: modules/v2/admin/user/forget_request_module.class.php:183
 msgid "用户名与其信息不匹配！"
 msgstr ""
 
