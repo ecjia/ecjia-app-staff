@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ecjia App staff 1.27.4\n"
 "Report-Msgid-Bugs-To: https://make.ecjia.com/polyglots/\n"
-"POT-Creation-Date: 2019-03-22 03:53:32+00:00\n"
+"POT-Creation-Date: 2019-03-29 01:41:58+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -682,43 +682,43 @@ msgstr ""
 msgid "平台管理员请登录掌柜管理"
 msgstr ""
 
-#: privilege.php:75 privilege.php:225
+#: privilege.php:78 privilege.php:238
 msgid "商家登录"
 msgstr ""
 
-#: privilege.php:150
+#: privilege.php:154
 msgid "登录成功"
 msgstr ""
 
-#: privilege.php:152
+#: privilege.php:156
 msgid "该店铺已被锁定，暂无法登录"
 msgstr ""
 
-#: privilege.php:155
+#: privilege.php:159
 msgid "您输入的帐号信息不正确。"
 msgstr ""
 
-#: privilege.php:208
+#: privilege.php:221
 msgid "获取店长信息失败。"
 msgstr ""
 
-#: privilege.php:211
+#: privilege.php:224
 msgid "抱歉！只允许超级管理员进行登录。"
 msgstr ""
 
-#: privilege.php:214
+#: privilege.php:227
 msgid "请使用正确的管理员账号从平台后台登录。"
 msgstr ""
 
-#: privilege.php:217
+#: privilege.php:230
 msgid "抱歉！请求超时。"
 msgstr ""
 
-#: privilege.php:220
+#: privilege.php:233
 msgid "传参出错。"
 msgstr ""
 
-#: privilege.php:223
+#: privilege.php:236
 msgid "抱歉！数据丢失，登录失败。"
 msgstr ""
 
