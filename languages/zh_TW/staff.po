@@ -4,16 +4,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ecjia App staff 1.27.4\n"
 "Report-Msgid-Bugs-To: https://make.ecjia.com/polyglots/\n"
-"POT-Creation-Date: 2019-03-20 07:33:55+00:00\n"
+"POT-Creation-Date: 2019-04-04 10:59+0800\n"
+"PO-Revision-Date: 2019-04-04 10:59+0800\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <ecjia@ecjia.com>\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-03-27 10:08+0800\n"
-"Language-Team: LANGUAGE <ecjia@ecjia.com>\n"
-"X-Generator: Poedit 2.2\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 1.8.7\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_TW\n"
 
 #: admin_store_staff.php:84
 msgid "入驻商家"
@@ -28,11 +28,11 @@ msgstr "自營店鋪"
 msgid "查看员工"
 msgstr "查看員工"
 
-#: admin_store_staff.php:121 admin_store_staff.php:279
+#: admin_store_staff.php:121 admin_store_staff.php:275
 msgid "自营店铺列表"
 msgstr "自營店鋪列表"
 
-#: admin_store_staff.php:123 admin_store_staff.php:281
+#: admin_store_staff.php:123 admin_store_staff.php:277
 msgid "入驻商家列表"
 msgstr "入駐商家列表"
 
@@ -56,31 +56,31 @@ msgstr "姓名不能為空"
 msgid "联系手机不能为空"
 msgstr "聯繫手機不能為空"
 
-#: admin_store_staff.php:198
+#: admin_store_staff.php:194
 msgid "邮箱不能为空"
 msgstr "郵箱不能為空"
 
-#: admin_store_staff.php:203
+#: admin_store_staff.php:199
 msgid "联系手机员工中已存在，请修改"
 msgstr "聯繫手機員工中已存在，請修改"
 
-#: admin_store_staff.php:207
+#: admin_store_staff.php:203
 msgid "邮箱员工中已存在，请修改"
 msgstr "郵箱員工中已存在，請修改"
 
-#: admin_store_staff.php:221 admin_store_staff.php:310
+#: admin_store_staff.php:217 admin_store_staff.php:306
 msgid "更新成功"
 msgstr "更新成功"
 
-#: admin_store_staff.php:257
+#: admin_store_staff.php:253
 msgid "重置成功"
 msgstr "重置成功"
 
-#: admin_store_staff.php:259
+#: admin_store_staff.php:255
 msgid "重置失败"
 msgstr "重置失敗"
 
-#: admin_store_staff.php:272 admin_store_staff.php:283
+#: admin_store_staff.php:268 admin_store_staff.php:279
 #: apis/staff_store_menu_api.class.php:59
 msgid "员工设置"
 msgstr "員工設置"
@@ -618,22 +618,22 @@ msgstr "請填寫用戶相關信息！"
 msgid "邮箱格式不正确！"
 msgstr "郵箱格式不正確！"
 
-#: modules/v2/admin/user/forget_request_module.class.php:108
-#: modules/v2/admin/user/forget_request_module.class.php:172
+#: modules/v2/admin/user/forget_request_module.class.php:105
+#: modules/v2/admin/user/forget_request_module.class.php:169
 msgid "账户变更效验码"
 msgstr "賬戶變更效驗碼"
 
-#: modules/v2/admin/user/forget_request_module.class.php:118
-#: modules/v2/admin/user/forget_request_module.class.php:182
+#: modules/v2/admin/user/forget_request_module.class.php:115
+#: modules/v2/admin/user/forget_request_module.class.php:179
 msgid "邮件发送失败！"
 msgstr "郵件發送失敗！"
 
-#: modules/v2/admin/user/forget_request_module.class.php:122
-#: modules/v2/admin/user/forget_request_module.class.php:156
+#: modules/v2/admin/user/forget_request_module.class.php:119
+#: modules/v2/admin/user/forget_request_module.class.php:153
 msgid "用户不存在！"
 msgstr "用戶不存在！"
 
-#: modules/v2/admin/user/forget_request_module.class.php:186
+#: modules/v2/admin/user/forget_request_module.class.php:183
 msgid "用户名与其信息不匹配！"
 msgstr "用戶名與其信息不匹配！"
 
@@ -685,43 +685,43 @@ msgstr "此設備不屬於當前店鋪設備，請使用當前店鋪設備登錄
 msgid "平台管理员请登录掌柜管理"
 msgstr "平台管理員請登錄掌櫃管理"
 
-#: privilege.php:75 privilege.php:225
+#: privilege.php:78 privilege.php:238
 msgid "商家登录"
 msgstr "商家登錄"
 
-#: privilege.php:150
+#: privilege.php:154
 msgid "登录成功"
 msgstr "登錄成功"
 
-#: privilege.php:152
+#: privilege.php:156
 msgid "该店铺已被锁定，暂无法登录"
 msgstr "該店鋪已被鎖定，暫無法登錄"
 
-#: privilege.php:155
+#: privilege.php:159
 msgid "您输入的帐号信息不正确。"
 msgstr "您輸入的帳號信息不正確。"
 
-#: privilege.php:208
+#: privilege.php:221
 msgid "获取店长信息失败。"
 msgstr "獲取店長信息失敗。"
 
-#: privilege.php:211
+#: privilege.php:224
 msgid "抱歉！只允许超级管理员进行登录。"
 msgstr "抱歉！只允許超級管理員進行登錄。"
 
-#: privilege.php:214
+#: privilege.php:227
 msgid "请使用正确的管理员账号从平台后台登录。"
 msgstr "請使用正確的管理員賬號從平台後台登錄。"
 
-#: privilege.php:217
+#: privilege.php:230
 msgid "抱歉！请求超时。"
 msgstr "抱歉！請求超時。"
 
-#: privilege.php:220
+#: privilege.php:233
 msgid "传参出错。"
 msgstr "傳參出錯。"
 
-#: privilege.php:223
+#: privilege.php:236
 msgid "抱歉！数据丢失，登录失败。"
 msgstr "抱歉！數據丟失，登錄失敗。"
 
