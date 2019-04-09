@@ -103,7 +103,7 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
 		
 		if ($row_staff) {
 		    //商家
-		    return $this->signin_merchant($username, $password, $device, $api_version, $login_type);
+		    return $this->signin_merchant($username, $password, $device, $api_version, $login_type, $request);
 		} else {
 		    //平台
 		    $result = new ecjia_error('login_error', __('此账号不是商家账号', 'staff'));
@@ -111,7 +111,7 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
 		}
 	}
 
-    private function signin_merchant($username, $password, $device, $api_version, $login_type = '') {
+    private function signin_merchant($username, $password, $device, $api_version, $login_type = '', $request = null) {
         /* 收银台请求判断处理*/
         $codes = array('8001', '8011');
         if (!empty($device) && is_array($device) && in_array($device['code'], $codes)) {
@@ -290,25 +290,13 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
             $out['userinfo']['user_type']		= 'merchant';
                     
             //修正关联设备号
-            $result = ecjia_app::validate_application('mobile');
-            if (!is_ecjia_error($result)) {
-                if (!empty($device['udid']) && !empty($device['client']) && !empty($device['code'])) {
-                    $device_data = array(
-                            'device_udid'   => $device['udid'],
-                            'device_client' => $device['client'],
-                            'device_code'   => $device['code'],
-                            'user_type'     => 'merchant',
-                    );
-                    $device_info = RC_DB::table('mobile_device')->where('device_udid', $device['udid'])->where('device_client', $device['client'])->where('device_code', $device['code'])->where('user_type', 'merchant')->first();
-                    $time = RC_Time::gmtime();
-                    if (empty($device_info)) {
-                        $device_data['add_time'] = $time;
-                        RC_DB::table('mobile_device')->insert($device_data);
-                    } else {
-                        RC_DB::table('mobile_device')->where('device_udid', $device['udid'])->where('device_client', $device['client'])->where('device_code', $device['code'])->where('user_type', 'merchant')->update(array('user_id' => $_SESSION['staff_id'], 'update_time' => $time));
-                    }
-                }
-            }
+            RC_Api::api('mobile', 'bind_device_user', array(
+                'device_udid'   => $request->header('device-udid'),
+                'device_client' => $request->header('device-client'),
+                'device_code'   => $request->header('device-code'),
+                'user_type'     => 'merchant',
+                'user_id'       => session('session_user_id'),
+            ));
          
             return $out;
         } else {
