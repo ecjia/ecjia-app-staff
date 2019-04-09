@@ -108,7 +108,6 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
 		    //平台
 		    $result = new ecjia_error('login_error', __('此账号不是商家账号', 'staff'));
 		    return $result;
-// 		    return signin_admin($username, $password, $device);
 		}
 	}
 
@@ -183,21 +182,15 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
              [device_id]
              [ip] => 0.0.0.0
               */
-        
+
+            $this->admin_session($row['user_id'], $row['name'], $row['action_list'], $row['mobile'], $row['email']);
         
             $_SESSION['admin_id']       = 0;
             $_SESSION['admin_name']     = null;
-            $_SESSION['action_list']    = $row['action_list'];
-             
+
             $_SESSION['store_id']       = $row['store_id'];
             $_SESSION['store_name']     = RC_DB::table('store_franchisee')->where('store_id', $row['store_id'])->pluck('merchants_name');
-            $_SESSION['staff_id']       = $row['user_id'];
-            $_SESSION['staff_mobile']   = $row['mobile'];
-            $_SESSION['staff_name']     = $row['name'];
-            $_SESSION['staff_email']    = $row['email'];
-            
-            $_SESSION['last_login']     = $row['last_login'];
-            $_SESSION['last_ip']        = $row['last_ip'];
+
             
             /* 获取device_id*/
             $device_id = RC_DB::table('mobile_device')
@@ -207,16 +200,6 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
                             ->pluck('id');
             
             $_SESSION['device_id'] = $device_id;
-           
-//             if (empty($row['salt'])) {
-//                 $salt = rand(1, 9999);
-//                 $new_possword = md5(md5($password) . $salt);
-//                 $data = array(
-//                     'salt'  => $salt,
-//                     'password'  => $new_possword
-//                 );
-//                 RC_DB::table('staff_user')->where('user_id', $_SESSION['staff_id'])->update($data);
-//             }
         
             if ($row['action_list'] == 'all' && empty($row['last_login'])) {
                 $_SESSION['shop_guide'] = true;
