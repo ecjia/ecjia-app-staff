@@ -5,14 +5,14 @@ msgstr ""
 "Project-Id-Version: Ecjia App staff 1.27.4\n"
 "Report-Msgid-Bugs-To: https://make.ecjia.com/polyglots/\n"
 "POT-Creation-Date: 2019-04-04 10:59+0800\n"
-"PO-Revision-Date: 2019-04-04 10:59+0800\n"
+"PO-Revision-Date: 2019-04-09 10:20+0800\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <ecjia@ecjia.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: admin_store_staff.php:84
@@ -151,7 +151,7 @@ msgstr "員工組"
 
 #: classes/StoreCleanHandlers/StoreStaffClear.php:36
 msgid "店铺员工"
-msgstr "員工組"
+msgstr "店鋪員工"
 
 #: classes/StoreCleanHandlers/StoreStaffClear.php:49
 msgid "店铺员工总共<span class=\"ecjiafc-red ecjiaf-fs3\">%s</span>个"
@@ -241,7 +241,7 @@ msgstr "請輸入員工組名稱"
 
 #: configs/jslang.php:74
 msgid "请输入员工组描述"
-msgstr "請輸入員工組名稱"
+msgstr "請輸入員工組描述"
 
 #: configs/jslang.php:76
 msgid "确定"
@@ -261,7 +261,7 @@ msgstr "未分組"
 
 #: configs/staff_internal_group.php:51 merchant.php:100 merchant.php:140
 msgid "配送员"
-msgstr "未分組"
+msgstr "配送員"
 
 #: configs/staff_internal_group.php:52 merchant.php:102 merchant.php:142
 msgid "收银员"
@@ -315,7 +315,7 @@ msgstr "密碼修改成功!"
 #: get_password.php:214 get_password.php:320
 #: modules/admin/user/password_module.class.php:93
 msgid "密码修改失败!"
-msgstr "密碼修改成功!"
+msgstr "密碼修改失敗!"
 
 #: get_password.php:236
 msgid "该手机账号不存在，无法进行重置密码"
@@ -787,7 +787,7 @@ msgstr "員工編號"
 
 #: content/apps/staff/templates/admin/store_staff.dwt.php:63
 msgid "员工姓名"
-msgstr "員工編號"
+msgstr "員工姓名"
 
 #: content/apps/staff/templates/admin/store_staff.dwt.php:63
 #: content/apps/staff/templates/merchant/staff_list.dwt.php:49
@@ -828,7 +828,7 @@ msgstr "聯繫手機："
 
 #: content/apps/staff/templates/admin/store_staff_edit.dwt.php:56
 msgid "电子邮箱："
-msgstr "聯繫手機："
+msgstr "電子郵箱："
 
 #: content/apps/staff/templates/admin/store_staff_edit.dwt.php:73
 #: content/apps/staff/templates/merchant/staff_group_edit.dwt.php:92
@@ -894,7 +894,7 @@ msgstr "員工名稱："
 #: content/apps/staff/templates/merchant/staff_info.dwt.php:182
 #: content/apps/staff/templates/merchant/staff_edit.dwt.php:37
 msgid "员工昵称："
-msgstr "員工名稱："
+msgstr "員工暱稱："
 
 #: content/apps/staff/templates/merchant/staff_info.dwt.php:106
 #: content/apps/staff/templates/merchant/staff_info.dwt.php:189
@@ -1190,7 +1190,7 @@ msgstr "暫無操作日誌"
 
 #: content/apps/staff/templates/merchant/library/widget_merchant_dashboard_fastenter.lbi.php:4
 msgid "快捷入口"
-msgstr "暫無操作日誌"
+msgstr "快捷入口"
 
 #: content/apps/staff/templates/merchant/profile_info.dwt.php:30
 #: content/apps/staff/templates/merchant/profile_setting.dwt.php:30
@@ -1204,7 +1204,7 @@ msgstr "用戶編號"
 
 #: content/apps/staff/templates/merchant/profile_info.dwt.php:42
 msgid "用户姓名"
-msgstr "用戶編號"
+msgstr "用戶姓名"
 
 #: content/apps/staff/templates/merchant/profile_info.dwt.php:47
 msgid "用户昵称"
@@ -1324,7 +1324,7 @@ msgstr "請輸入新的郵箱賬號"
 
 #: content/apps/staff/templates/merchant/profile_setting.dwt.php:135
 msgid "请输入邮箱验证码"
-msgstr "請輸入新的郵箱帳號"
+msgstr "請輸入郵箱驗證碼"
 
 #: content/apps/staff/templates/merchant/profile_setting.dwt.php:137
 msgid "获取邮箱验证码"
