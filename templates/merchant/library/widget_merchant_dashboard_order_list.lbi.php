@@ -8,7 +8,7 @@
                         <a href="{$order_list.url}">
                             <img src="{$order_list.img}" width="60" height="60">
                         </a>
-                        <div class="title" style="color:#121212">{$order_list.title}</div>
+                        <div class="title" style="font-weight: 700; color:#333; margin-bottom: 0">{$order_list.title}</div>
                     </div>
                     {/foreach}
                 </div>
