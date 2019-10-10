@@ -113,7 +113,7 @@ class v2_admin_user_signin_module extends api_admin implements api_interface {
 
     private function signin_merchant($username, $password, $device, $api_version, $login_type = '', $request = null) {
         /* 收银台请求判断处理*/
-        $codes = array('8001', '8011');
+        $codes = RC_Loader::load_app_config('cashier_device_code', 'cashier');
         if (!empty($device) && is_array($device) && in_array($device['code'], $codes)) {
             $staff_user_info = RC_DB::table('staff_user')->where('mobile', $username)->first();
             if (empty($staff_user_info)) {
