@@ -92,7 +92,7 @@
                         <div class="col-lg-6 controls">
                             <input class="form-control" id="name" name="name" type="text" />
                         </div>
-                        <span class="input-must m_l7"><span class="require-field" style="color:#FF0000,">*</span></span>
+                        <span class="input-must m_l7"><span class="require-field" style="color:#FF0000">*</span></span>
                     </div>
 
                     <div class="form-group">
@@ -141,7 +141,7 @@
                         <div class="col-lg-6 controls">
                               <input class="form-control" id="email" name="email" type="email" />
                         </div>
-                        <span class="input-must m_l7"><span class="require-field" style="color:#FF0000,">*</span></span>
+                        <span class="input-must m_l7"><span class="require-field" style="color:#FF0000">*</span></span>
                     </div>
                     
                     <div class="form-group">
@@ -149,7 +149,7 @@
                         <div class="col-lg-6 controls">
                               <input class="form-control" type="password" id="password" name="password"  />
                         </div>
-                        <span class="input-must m_l7"><span class="require-field" style="color:#FF0000,">*</span></span>
+                        <span class="input-must m_l7"><span class="require-field" style="color:#FF0000">*</span></span>
                     </div>
                       
                     <div class="form-group">
@@ -157,7 +157,7 @@
                          <div class="col-lg-6 controls">
                               <input class="form-control" id="confirm_password" name="confirm_password" type="password" />
                           </div>
-                        	<span class="input-must m_l7"><span class="require-field" style="color:#FF0000,">*</span></span>
+                        	<span class="input-must m_l7"><span class="require-field" style="color:#FF0000">*</span></span>
                     </div>
                     
                     <div class="form-group ">
