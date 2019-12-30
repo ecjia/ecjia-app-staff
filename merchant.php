@@ -126,6 +126,9 @@ class merchant extends ecjia_merchant
         $group_list = $this->get_group_select_list($_SESSION['store_id']);
         $this->assign('group_list', $group_list);
 
+        $group_id = $_GET['group_id'];
+        $this->assign('group_id', $group_id);
+
         $step = remove_xss($_GET['step']);
         if ($step == 1) {
             $this->assign('form_action', RC_Uri::url('staff/merchant/insert_one', array('step' => 1, 'group_id' => $_GET['group_id'])));

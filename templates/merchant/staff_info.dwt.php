@@ -120,7 +120,7 @@
                         <label for="firstname" class="control-label col-lg-2">{t domain="staff"}选择员工组：{/t}</label>
                         <div class="col-lg-6">
                             <select class="form-control" name="group_id">
-                               <!-- {html_options options=$group_list selected=$staff.group_id} -->
+                               <!-- {html_options options=$group_list selected=$group_id } -->
                             </select>
                         </div>
                     </div>
